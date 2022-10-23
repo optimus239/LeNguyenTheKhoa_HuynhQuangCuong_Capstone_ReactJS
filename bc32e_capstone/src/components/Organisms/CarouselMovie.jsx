@@ -14,7 +14,7 @@ const contentStyle = {
   backgroundRepeat: "no-repeat",
 };
 
-const Slider = () => {
+const CarouselMovie = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCarouselList());
@@ -33,10 +33,10 @@ const Slider = () => {
   };
 
   return (
-    <Carousel effect="fade" autoplay className="opacity-95">
+    <Carousel effect="fade" autoplay className="opacity-95 overflow-hidden">
       {renderCarousel()}
     </Carousel>
   );
 };
 
-export default Slider;
+export default CarouselMovie;

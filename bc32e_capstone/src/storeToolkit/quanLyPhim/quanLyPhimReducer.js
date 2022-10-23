@@ -6,6 +6,7 @@ const initialState = {
   isFetching: false,
   error: undefined,
   carouselList: [],
+  cinemaList: [],
 };
 
 export const { reducer: quanLyPhimReducer, actions: quanLyPhimActions } =
@@ -36,6 +37,19 @@ export const { reducer: quanLyPhimReducer, actions: quanLyPhimActions } =
           state.carouselList = action.payload;
         })
         .addCase(getCarouselList.rejected, (state, action) => {
+          state.isFetching = false;
+          state.error = action.payload;
+        });
+
+      builder.addCase(getCinemaList.pending, (state, action) => {
+        state.isFetching = true;
+      });
+      builder
+        .addCase(getCinemaList.fulfilled, (state, action) => {
+          state.isFetching = false;
+          state.cinemaList = action.payload;
+        })
+        .addCase(getCinemaList.rejected, (state, action) => {
           state.isFetching = false;
           state.error = action.payload;
         });
@@ -76,6 +90,25 @@ export const getCarouselList = createAsyncThunk(
       return result.data.content;
     } catch (err) {
       return rejectWithValue(err.respone.data);
+    }
+  }
+);
+
+export const getCinemaList = createAsyncThunk(
+  "quanLyPhim/getCinameList",
+  async (data, { rejectWithValue }) => {
+    try {
+      const result = await axios({
+        url: "http://movienew.cybersoft.edu.vn/api/QuanLyRap/LayThongTinHeThongRap",
+        method: "GET",
+        headers: {
+          TokenCyberSoft:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzMkUiLCJIZXRIYW5TdHJpbmciOiIyMC8wMy8yMDIzIiwiSGV0SGFuVGltZSI6IjE2NzkyNzA0MDAwMDAiLCJuYmYiOjE2NTA0NzQwMDAsImV4cCI6MTY3OTQxODAwMH0.S7l5kogAVJjRW8mjJ5gosJraYq5ahYjrBwnMJAaGxlY",
+        },
+      });
+      return result.data.content;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
     }
   }
 );

@@ -5,7 +5,7 @@ import Home from "../pages/home/Home";
 const Routers = () => {
   const routing = useRoutes([
     {
-      path: "/home",
+      path: "/",
       element: <Home />,
     },
   ]);
