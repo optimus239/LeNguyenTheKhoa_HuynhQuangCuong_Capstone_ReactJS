@@ -1,14 +1,16 @@
 import React from "react";
 import Header from "../../components/Organisms/Header";
-import MovieList from "../../components/Organisms/MovieList";
-import Slider from "../../components/Organisms/Slider";
+import MovieList from "../../components/Organisms/movieList/MovieList";
+import CarouselMovie from "../../components/Organisms/CarouselMovie";
+import Cinemas from "../../components/Organisms/Cinemas";
 
 const Home = () => {
   return (
-    <div>
+    <div className="container">
       <Header />
-      <Slider />
+      <CarouselMovie />
       <MovieList />
+      <Cinemas />
     </div>
   );
 };
