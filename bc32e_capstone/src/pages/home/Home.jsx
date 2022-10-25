@@ -8,11 +8,9 @@ import Cinemas from "../../layouts/cinemas/Cinemas";
 const Home = () => {
   return (
     <div className="container">
-      <Header />
       <CarouselMovie />
       <MovieList />
       <Cinemas />
-      <Footer />
     </div>
   );
 };
