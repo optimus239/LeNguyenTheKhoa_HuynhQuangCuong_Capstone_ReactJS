@@ -38,7 +38,7 @@ const Header = () => {
                   href="#pablo"
                 >
                   <i className="text-lg text-white opacity-75"></i>
-                  <span className="ml-2">Home</span>
+                  <span className="ml-2">Trang chủ</span>
                 </a>
               </li>
               <li className="nav-item">
@@ -47,7 +47,7 @@ const Header = () => {
                   href="#pablo"
                 >
                   <i className="text-lg text-white opacity-75"></i>
-                  <span className="ml-2">Movies</span>
+                  <span className="ml-2">Phim</span>
                 </a>
               </li>
               <li className="nav-item">
@@ -56,17 +56,17 @@ const Header = () => {
                   href="#pablo"
                 >
                   <i className="text-lg text-white opacity-75"></i>
-                  <span className="ml-2">Cinemas</span>
+                  <span className="ml-2">Rạp</span>
                 </a>
               </li>
             </ul>
           </div>
           <div className="flex">
             <button className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
-              Sign In
+              Đăng ký
             </button>
             <button className="ml-3 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
-              Sign Up
+              Đăng nhập
             </button>
           </div>
         </div>

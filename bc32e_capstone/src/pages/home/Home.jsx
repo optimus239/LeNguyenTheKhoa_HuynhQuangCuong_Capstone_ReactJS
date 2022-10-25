@@ -1,8 +1,9 @@
 import React from "react";
-import Header from "../../components/Organisms/Header";
-import MovieList from "../../components/Organisms/movieList/MovieList";
-import CarouselMovie from "../../components/Organisms/CarouselMovie";
-import Cinemas from "../../components/Organisms/Cinemas";
+import Header from "../../layouts/Header";
+import MovieList from "../../layouts/movieList/MovieList";
+import Footer from "../../layouts/footer/Footer";
+import CarouselMovie from "../../layouts/CarouselMovie";
+import Cinemas from "../../layouts/cinemas/Cinemas";
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
       <CarouselMovie />
       <MovieList />
       <Cinemas />
+      <Footer />
     </div>
   );
 };
