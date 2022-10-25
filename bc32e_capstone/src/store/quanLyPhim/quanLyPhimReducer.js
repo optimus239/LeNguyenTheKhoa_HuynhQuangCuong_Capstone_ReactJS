@@ -61,7 +61,7 @@ export const getMovieList = createAsyncThunk(
   async (data, { dispatch, getState, rejectWithValue }) => {
     try {
       const result = await axios({
-        url: "http://movienew.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01",
+        url: "https://movienew.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01",
         method: "GET",
         headers: {
           TokenCyberSoft:
@@ -80,7 +80,7 @@ export const getCarouselList = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const result = await axios({
-        url: "http://movienew.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachBanner",
+        url: "https://movienew.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachBanner",
         method: "GET",
         headers: {
           TokenCyberSoft:
@@ -99,7 +99,7 @@ export const getCinemaList = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const result = await axios({
-        url: "http://movienew.cybersoft.edu.vn/api/QuanLyRap/LayThongTinHeThongRap",
+        url: "https://movienew.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=GP01",
         method: "GET",
         headers: {
           TokenCyberSoft:

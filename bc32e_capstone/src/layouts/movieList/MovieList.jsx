@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMovieList } from "../../../storeToolkit/quanLyPhim/quanLyPhimReducer";
+import { getMovieList } from "../../store/quanLyPhim/quanLyPhimReducer";
 import Slider from "react-slick";
-import styled from "styled-components";
 import styleSlick from "./MovieList.css";
 import { Card } from "antd";
 import { useSearchParams } from "react-router-dom";
@@ -88,7 +87,7 @@ const MovieList = () => {
             });
           }}
         >
-          <p>NOW PLAYING</p>
+          <p>Đang chiếu</p>
         </button>
         <button
           className="btn-coming"
@@ -98,7 +97,7 @@ const MovieList = () => {
             });
           }}
         >
-          <p>COMING SOON</p>
+          <p>Sắp chiếu</p>
         </button>
       </div>
       <Slider {...settings}>{renderMovie()}</Slider>

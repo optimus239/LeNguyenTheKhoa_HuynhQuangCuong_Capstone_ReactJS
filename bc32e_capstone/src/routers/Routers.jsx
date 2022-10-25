@@ -7,6 +7,12 @@ const Routers = () => {
     {
       path: "/",
       element: <Home />,
+      children: [
+        {
+          path: "home",
+          element: <Home />,
+        },
+      ],
     },
   ]);
   return routing;
