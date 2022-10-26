@@ -1,12 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { logOut, useQuanLyNguoiDung } from "../store/quanLyNguoiDung";
 
 const Header = () => {
   const { userLogin } = useQuanLyNguoiDung();
+  console.log("userLogin: ", userLogin);
   const [navbarOpen, setNavbarOpen] = useState(false);
   console.log("navbarOpen: ", navbarOpen);
   const dispatch = useDispatch();
@@ -18,12 +19,12 @@ const Header = () => {
       <Navbar className="flex flex-wrap items-center justify-between px-2 py-5 bg-transparent fixed mb-3 z-10 w-full ">
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
-            <a
+            <NavLink
               className="uppercase text-red-700 font-bold text-lg items-center"
-              href="#pablo"
+              to={"/"}
             >
               Cybersoft
-            </a>
+            </NavLink>
             <button
               className="text-white cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
               type="button"
@@ -69,7 +70,7 @@ const Header = () => {
               </li>
             </ul>
           </div>
-          <div className="items-center flex-shrink-0 hidden lg:flex">
+          <div className="items-center text-white flex-shrink-0 hidden lg:flex">
             {userLogin ? (
               <>
                 <span className="mr-2">Xin Chào</span>
