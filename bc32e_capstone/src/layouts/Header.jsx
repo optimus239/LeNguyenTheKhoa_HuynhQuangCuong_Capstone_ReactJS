@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Header = () => {
@@ -63,10 +64,10 @@ const Header = () => {
           </div>
           <div className="flex">
             <button className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
-              Đăng ký
+              <Link to="/register">Đăng ký</Link>
             </button>
             <button className="ml-3 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
-              Đăng nhập
+              <Link to="/login">Đăng nhập</Link>
             </button>
           </div>
         </div>

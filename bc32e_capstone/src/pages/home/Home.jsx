@@ -7,12 +7,10 @@ import Cinemas from "../../layouts/cinemas/Cinemas";
 
 const Home = () => {
   return (
-    <div className="container mx-auto">
-      <Header />
+    <div className="container">
       <CarouselMovie />
       <MovieList />
       <Cinemas />
-      <Footer />
     </div>
   );
 };
