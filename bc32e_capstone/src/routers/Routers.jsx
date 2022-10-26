@@ -2,9 +2,9 @@ import React from "react";
 import { useRoutes } from "react-router-dom";
 import AdminLayout from "../layouts/adminLayout/AdminLayout";
 import DashBoard from "../layouts/adminLayout/DashBoard";
-import Films from "../layouts/adminLayout/Films";
 
 import MainLayout from "../layouts/MainLayout";
+import NotFound from "../layouts/NotFound";
 import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
 import Register from "../pages/register/Register";
@@ -38,11 +38,11 @@ const Routers = () => {
           path: "/admin",
           element: <DashBoard />,
         },
-        {
-          path: "film",
-          element: <Films />,
-        },
       ],
+    },
+    {
+      path: "*",
+      element: <NotFound />,
     },
   ]);
   return routing;
