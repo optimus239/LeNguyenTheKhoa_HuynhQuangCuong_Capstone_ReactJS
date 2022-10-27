@@ -7,6 +7,7 @@ import MainLayout from "../layouts/MainLayout";
 import NotFound from "../layouts/NotFound";
 import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
+import MovieDetail from "../pages/movieDetail/MovieDetail";
 import Register from "../pages/register/Register";
 import AddFilm from "../pages/Admin/Film/AddFilm";
 
@@ -21,6 +22,7 @@ const Routers = () => {
           path: "home",
           element: <Home />,
         },
+        { path: "detail/:movieIds", element: <MovieDetail /> },
         {
           path: "login",
           element: <Login />,
