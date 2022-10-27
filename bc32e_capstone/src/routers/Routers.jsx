@@ -1,13 +1,14 @@
 import React from "react";
 import { useRoutes } from "react-router-dom";
 import AdminLayout from "../layouts/adminLayout/AdminLayout";
-import DashBoard from "../layouts/adminLayout/DashBoard";
+import Films from "../pages/Admin/Film/Films";
 
 import MainLayout from "../layouts/MainLayout";
 import NotFound from "../layouts/NotFound";
 import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
 import Register from "../pages/register/Register";
+import AddFilm from "../pages/Admin/Film/AddFilm";
 
 const Routers = () => {
   const routing = useRoutes([
@@ -36,7 +37,15 @@ const Routers = () => {
       children: [
         {
           path: "/admin",
-          element: <DashBoard />,
+          element: <Films />,
+        },
+        {
+          path: "films",
+          element: <Films />,
+        },
+        {
+          path: "films/addfilm",
+          element: <AddFilm />,
         },
       ],
     },
