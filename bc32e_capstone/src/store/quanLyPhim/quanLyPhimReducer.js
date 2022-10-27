@@ -6,7 +6,8 @@ const initialState = {
   isFetching: false,
   error: undefined,
   carouselList: [],
-  cinemaList: [],
+
+  movieDetail: undefined,
 };
 
 export const { reducer: quanLyPhimReducer, actions: quanLyPhimActions } =
@@ -41,18 +42,17 @@ export const { reducer: quanLyPhimReducer, actions: quanLyPhimActions } =
           state.error = action.payload;
         });
 
-      builder.addCase(getCinemaList.pending, (state, action) => {
+      builder.addCase(getMovieDetail.pending, (state, action) => {
         state.isFetching = true;
       });
-      builder
-        .addCase(getCinemaList.fulfilled, (state, action) => {
-          state.isFetching = false;
-          state.cinemaList = action.payload;
-        })
-        .addCase(getCinemaList.rejected, (state, action) => {
-          state.isFetching = false;
-          state.error = action.payload;
-        });
+      builder.addCase(getMovieDetail.fulfilled, (state, action) => {
+        state.isFetching = false;
+        state.movieDetail = action.payload;
+      });
+      builder.addCase(getMovieDetail.rejected, (state, action) => {
+        state.isFetching = false;
+        state.error = action.payload;
+      });
     },
   });
 
@@ -94,12 +94,12 @@ export const getCarouselList = createAsyncThunk(
   }
 );
 
-export const getCinemaList = createAsyncThunk(
-  "quanLyPhim/getCinameList",
-  async (data, { rejectWithValue }) => {
+export const getMovieDetail = createAsyncThunk(
+  "quanLyPhim/getMovieDetail",
+  async (movieId, { rejectWithValue }) => {
     try {
       const result = await axios({
-        url: "https://movienew.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=GP01",
+        url: `https://movienew.cybersoft.edu.vn/api/QuanLyPhim/LayThongTinPhim?MaPhim=${movieId}`,
         method: "GET",
         headers: {
           TokenCyberSoft:
@@ -108,7 +108,7 @@ export const getCinemaList = createAsyncThunk(
       });
       return result.data.content;
     } catch (err) {
-      return rejectWithValue(err.response.data);
+      return rejectWithValue(err.respone.data);
     }
   }
 );
