@@ -8,6 +8,7 @@ import {
 import { Breadcrumb, Layout, Menu } from "antd";
 import React, { useState } from "react";
 import "./dashBoard.css";
+import Films from "./Films";
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
   return {
@@ -75,15 +76,7 @@ const DashBoard = () => {
             <Breadcrumb.Item>User</Breadcrumb.Item>
             <Breadcrumb.Item>Bill</Breadcrumb.Item>
           </Breadcrumb>
-          <div
-            className="site-layout-background"
-            style={{
-              padding: 24,
-              minHeight: 360,
-            }}
-          >
-            Bill is a cat.
-          </div>
+          <Films />
         </Content>
         <Footer
           style={{
