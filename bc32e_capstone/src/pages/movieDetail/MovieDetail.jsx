@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getMovieDetail } from "../../store/quanLyPhim/quanLyPhimReducer";
 import "./MovieDetail.css";
 import moment from "moment";
@@ -15,6 +15,7 @@ const MovieDetail = () => {
   const param = useParams();
   console.log("param: ", param.movieIds);
   console.log("movieDetail: ", movieDetail);
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(getMovieDetail(param.movieIds));
   }, []);
@@ -83,7 +84,9 @@ const MovieDetail = () => {
             style={{ height: 500 }}
             items={showTimesList?.heThongRapChieu.map((val, i) => {
               return {
-                label: <img src={val.logo} alt="" className="w-9 h-9" />,
+                label: (
+                  <img src={val.logo} alt="" className="w-9 h-9" key={i} />
+                ),
                 key: i,
                 children: val.cumRapChieu.map((item, i) => (
                   <div key={i}>
@@ -99,9 +102,19 @@ const MovieDetail = () => {
                           {item.diaChi}
                         </div>
                         {item.lichChieuPhim.map((lichChieu, i) => (
-                          <div className="text-neutral-50">
+                          <button
+                            className="text-neutral-50 mr-5"
+                            key={i}
+                            onClick={() => {
+                              if (!localStorage.getItem("USER_LOGIN")) {
+                                return navigate(
+                                  `/ticketroom/${lichChieu.maLichChieu}`
+                                );
+                              } else navigate("/login");
+                            }}
+                          >
                             {moment(lichChieu.ngayChieuGioChieu).format("LT")}
-                          </div>
+                          </button>
                         ))}
                       </div>
                     </div>
