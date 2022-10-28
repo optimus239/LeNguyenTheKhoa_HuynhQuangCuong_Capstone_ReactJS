@@ -1,11 +1,20 @@
 import React, { useRef } from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { logOut, useQuanLyNguoiDung } from "../store/quanLyNguoiDung";
 
 const Header = () => {
-  const titleRef = useRef();
+  const { userLogin } = useQuanLyNguoiDung();
+  console.log("userLogin: ", userLogin);
   const [navbarOpen, setNavbarOpen] = useState(false);
+  console.log("navbarOpen: ", navbarOpen);
+  const dispatch = useDispatch();
+  const dangXuat = () => {
+    dispatch(logOut());
+  };
+  const titleRef = useRef();
   console.log("navbarOpen: ", navbarOpen);
   const navigate = useNavigate();
   return (
