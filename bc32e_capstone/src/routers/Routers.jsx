@@ -5,8 +5,10 @@ import Films from "../pages/Admin/Film/Films";
 
 import MainLayout from "../layouts/MainLayout";
 import NotFound from "../layouts/NotFound";
+import Checkout from "../pages/checkout/Checkout";
 import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
+import MovieDetail from "../pages/movieDetail/MovieDetail";
 import Register from "../pages/register/Register";
 import AddFilm from "../pages/Admin/Film/AddFilm";
 
@@ -20,6 +22,11 @@ const Routers = () => {
         {
           path: "home",
           element: <Home />,
+        },
+        { path: "detail/:movieIds", element: <MovieDetail /> },
+        {
+          path: "ticketroom/:movieIds",
+          element: <Checkout />,
         },
         {
           path: "login",

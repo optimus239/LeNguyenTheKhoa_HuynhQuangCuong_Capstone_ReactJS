@@ -4,7 +4,7 @@ import { getMovieList } from "../../store/quanLyPhim/quanLyPhimReducer";
 import Slider from "react-slick";
 import styleSlick from "./MovieList.css";
 import { Card } from "antd";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const { Meta } = Card;
 
@@ -52,6 +52,7 @@ const MovieList = () => {
   const dispatch = useDispatch();
   const { movieList } = useSelector((state) => state.quanLyPhimReducer);
   console.log("movieList: ", movieList);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getMovieList());
@@ -72,6 +73,12 @@ const MovieList = () => {
             }
           >
             <Meta title={val.tenPhim} />
+            <button
+              className="mt-5"
+              onClick={() => navigate(`/detail/${val.maPhim}`)}
+            >
+              Chi tiết
+            </button>
           </Card>
         </div>
       ));
