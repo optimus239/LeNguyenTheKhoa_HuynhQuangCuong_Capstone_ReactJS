@@ -26,7 +26,6 @@ export const {
       localStorage.removeItem("USER_LOGIN");
       localStorage.removeItem("TOKEN");
       state.userLogin = null;
-      // window.location.reload(false);
     },
   },
   // Xử lý những action bất đồng bộ (call API)

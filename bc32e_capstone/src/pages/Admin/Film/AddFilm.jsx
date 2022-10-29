@@ -1,127 +1,295 @@
-import React from "react";
+import moment from "moment";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { themPhimUploadHinh } from "../../../store/quanLyPhim/quanLyPhimReducer";
 
 const AddFilm = () => {
+  const [imgUpload, setImgUpload] = useState(null);
+  const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    mode: "onBlur",
+    defaultValues: {
+      tenPhim: "",
+      trailer: "",
+      moTa: "",
+      maNhom: "GP13",
+      ngayKhoiChieu: "",
+      sapChieu: false,
+      dangChieu: true,
+      hot: true,
+      danhGia: 10,
+      hinhAnh: "",
+    },
+  });
+  // console.log("errors", errors);
+
+  const handleImg = (e) => {
+    let file = e.target.files[0];
+    let reader = new FileReader();
+    reader.onload = (e) => {
+      setImgUpload(e.target.result);
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const onSubmit = (data) => {
+    data.ngayKhoiChieu = moment(data.ngayKhoiChieu).format("DD-MM-YYYY");
+    data.dangChieu = !data.sapChieu;
+    // data.hinhAnh = data.hinhAnh[0].name;
+    console.log(data);
+
+    // Tạo đối tượng formdata
+    let formData = new FormData();
+    for (let key in data) {
+      if (key !== "hinhAnh") {
+        formData.append(key, data[key]);
+      } else {
+        formData.append("File", data.hinhAnh[0], data.hinhAnh[0].name);
+      }
+    }
+
+    const res = dispatch(themPhimUploadHinh(formData));
+    console.log(res);
+  };
   return (
     <div>
       <h3>Thêm phim mới</h3>
-      <form className="w-4/5 mx-auto">
-        <div className="relative z-0 mb-6 w-full group">
-          <input
-            type="text"
-            name="floating_tenPhim"
-            id="floating_tenPhim"
-            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            placeholder=" "
-            required
-          />
-          <label
-            htmlFor="floating_tenPhim"
-            className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-          >
-            Tên Phim
-          </label>
-        </div>
-        <div className="relative z-0 mb-6 w-full group">
-          <input
-            type="text"
-            name="floating_trailer"
-            id="floating_trailer"
-            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            placeholder=" "
-            required
-          />
-          <label
-            htmlFor="floating_trailer"
-            className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-          >
-            Trailer
-          </label>
-        </div>
-        <div className="relative z-0 mb-6 w-full group">
-          <input
-            type="text"
-            name="floating_moTa"
-            id="floating_moTa"
-            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            placeholder=" "
-            required
-          />
-          <label
-            htmlFor="floating_moTa"
-            className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-          >
-            Mô tả
-          </label>
-        </div>
+      <form className="w-4/5 mx-auto" onSubmit={handleSubmit(onSubmit)}>
         <div className="grid md:grid-cols-2 md:gap-6">
-          <div>
-            <label htmlFor="toggle" className="text-2xs text-gray-700 mr-12">
-              Hot:
+          <div className="relative z-0 mb-6 w-full group">
+            <label
+              htmlFor="tenPhim"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >
+              Tên Phim
             </label>
-            <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-              <input
-                type="checkbox"
-                name="toggle"
-                id="toggle1"
-                className="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-2 appearance-none cursor-pointer"
-              />
-              <label
-                htmlFor="toggle1"
-                className="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 cursor-pointer"
-              />
-            </div>
+            <input
+              type="text"
+              id="tenPhim"
+              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+              placeholder="Tên Phim"
+              {...register("tenPhim", {
+                required: "Không được bỏ trống",
+              })}
+            />
+            {errors?.tenPhim?.message && (
+              <p className="text-red-400 mt-2">{errors?.tenPhim?.message}</p>
+            )}
           </div>
           <div className="relative z-0 mb-6 w-full group">
-            <input
-              type="date"
-              name="floating_ngayKhoiChieu"
-              id="floating_ngayKhoiChieu"
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              placeholder=" "
-              required
-            />
             <label
-              htmlFor="floating_ngayKhoiChieu"
-              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              htmlFor="maNhom"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
             >
-              Ngày khởi chiếu
+              Mã Nhóm
             </label>
+            <select
+              id="maNhom"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              {...register("maNhom", {
+                // required: "Không được bỏ trống",
+              })}
+            >
+              <option>GP00</option>
+              <option>GP01</option>
+              <option>GP02</option>
+              <option>GP03</option>
+              <option>GP04</option>
+              <option>GP05</option>
+              <option>GP06</option>
+              <option>GP07</option>
+              <option>GP08</option>
+              <option>GP09</option>
+              <option>GP10</option>
+              <option>GP11</option>
+              <option>GP12</option>
+              <option defaultValue>GP13</option>
+            </select>
+          </div>
+        </div>
+        <div className="grid md:grid-cols-2 md:gap-6">
+          <div className="relative z-0 mb-6 w-full group">
+            <label
+              htmlFor="trailer"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >
+              Trailer:
+            </label>
+            <input
+              type="text"
+              id="trailer"
+              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+              placeholder="Trailer"
+              {...register("trailer", {
+                required: "Không được bỏ trống",
+              })}
+            />
+            {errors?.trailer?.message && (
+              <p className="text-red-400 mt-2">{errors?.trailer?.message}</p>
+            )}
+          </div>
+          <div className="relative z-0 mb-6 w-full group">
+            <label
+              htmlFor="danhGia"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >
+              Đánh Giá
+            </label>
+            <input
+              type="number"
+              id="danhGia"
+              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+              placeholder="Đánh Giá"
+              min={1}
+              max={10}
+              {...register("danhGia", {
+                min: {
+                  value: 1,
+                  message: "Không ít hơn 1 điểm",
+                },
+                max: {
+                  value: 10,
+                  message: "Không quá 10 điểm",
+                },
+                required: "Không được bỏ trống",
+              })}
+            />
+            {errors?.danhGia?.message && (
+              <p className="text-red-400 mt-2">{errors?.danhGia?.message}</p>
+            )}
+          </div>
+        </div>
+        <div className="relative z-0 mb-6 w-full group">
+          <div className="relative z-0 mb-6 w-full group">
+            <label
+              htmlFor="trailer"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >
+              Mô Tả:
+            </label>
+            <input
+              type="text"
+              id="moTa"
+              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+              placeholder="Mô tả"
+              {...register("moTa", {
+                required: "Không được bỏ trống",
+              })}
+            />
+            {errors?.moTa?.message && (
+              <p className="text-red-400 mt-2">{errors?.moTa?.message}</p>
+            )}
           </div>
         </div>
         <div className="grid md:grid-cols-2 md:gap-6">
           <div>
-            <label htmlFor="toggle" className="text-2xs text-gray-700 mr-2">
-              Sắp chiếu:
+            <label
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              htmlFor="user_avatar"
+            >
+              Hình Ảnh
             </label>
-            <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+            <input
+              className=" w-[60%] text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 p-2"
+              aria-describedby="user_avatar_help"
+              id="hinhAnh"
+              type="file"
+              accept="image/jpeg, image/png"
+              {...register("hinhAnh", {
+                required: "Không được bỏ trống",
+              })}
+              onChange={handleImg}
+            />
+            <img
+              className="inline ml-3"
+              width={150}
+              src={imgUpload}
+              alt="..."
+            />
+            {errors?.hinhAnh?.message && (
+              <p className="text-red-400 mt-2">{errors?.hinhAnh?.message}</p>
+            )}
+          </div>
+
+          <div className="relative z-0 mb-6 w-full group">
+            <div className="mb-6">
+              <label
+                htmlFor="ngayKhoiChieu"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              >
+                Ngày Khởi Chiếu
+              </label>
               <input
-                type="checkbox"
-                name="toggle"
-                id="toggle"
-                className="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-2 appearance-none cursor-pointer"
+                type="date"
+                id="tenPhim"
+                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                placeholder="Ngày Khởi Chiếu"
+                {...register("ngayKhoiChieu", {
+                  required: "Không được bỏ trống",
+                })}
               />
+              {errors?.ngayKhoiChieu?.message && (
+                <p className="text-red-400 mt-2">
+                  {errors?.ngayKhoiChieu?.message}
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+        <div className="grid md:grid-cols-2 md:gap-6">
+          <div className="relative z-0 mb-6 w-full group">
+            <div>
               <label
                 htmlFor="toggle"
-                className="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 cursor-pointer"
-              />
+                className="text-sm font-medium text-gray-900 dark:text-gray-300 mr-12"
+              >
+                Sắp Chiếu:
+              </label>
+              <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                <input
+                  type="checkbox"
+                  name="sapChieu"
+                  id="sapChieu"
+                  className="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-2 appearance-none cursor-pointer"
+                  {...register("sapChieu")}
+                />
+                <label
+                  htmlFor="sapChieu"
+                  className="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 cursor-pointer"
+                />
+              </div>
             </div>
           </div>
 
           <div className="relative z-0 mb-6 w-full group">
-            <input
-              type="file"
-              name="floating_company"
-              id="floating_company"
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0  border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              placeholder=" "
-              required
-            />
-            <label
-              htmlFor="floating_company"
-              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-            >
-              Hình Ảnh
-            </label>
+            <div>
+              <label
+                htmlFor="toggle"
+                className="text-sm font-medium text-gray-900 dark:text-gray-300 mr-12"
+              >
+                Hot:
+              </label>
+              <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                <input
+                  type="checkbox"
+                  name="hot"
+                  id="hot"
+                  className="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-2 appearance-none cursor-pointer"
+                  {...register("hot")}
+                />
+                <label
+                  htmlFor="hot"
+                  className="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 cursor-pointer"
+                />
+              </div>
+            </div>
           </div>
         </div>
         <button

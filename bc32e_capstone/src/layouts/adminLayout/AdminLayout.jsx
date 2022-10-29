@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./AdminLayout.css";
 
-import {
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+import { PieChartOutlined, VideoCameraOutlined } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu } from "antd";
 // import React, { useState } from "react";
 
@@ -31,17 +25,11 @@ const items = [
     "1",
     <PieChartOutlined />
   ),
-  getItem("Option 2", "2", <DesktopOutlined />),
-  getItem("Film Manager", "3", <UserOutlined />, [
+
+  getItem("Film Manager", "3", <VideoCameraOutlined />, [
     getItem(<NavLink to="/admin/films">Films</NavLink>, "31"),
     getItem(<NavLink to="/admin/films/addfilm">Add Film</NavLink>, "32"),
-    getItem("Alex", "33"),
   ]),
-  getItem("Team", "4", <TeamOutlined />, [
-    getItem("Team 1", "41"),
-    getItem("Team 2", "42"),
-  ]),
-  getItem("Files", "5", <FileOutlined />),
 ];
 
 const AdminLayout = () => {
@@ -78,7 +66,44 @@ const AdminLayout = () => {
           style={{
             padding: 0,
           }}
-        />
+        >
+          <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
+            <div className="items-center text-blue-400 flex-shrink-0 hidden lg:flex">
+              <span className="mr-2">Xin Chào</span>
+              <span className="mr-2">
+                <img
+                  className="w-full rounded-full"
+                  src="https://api.lorem.space/image/game?w=50&h=50"
+                  alt="..."
+                />
+              </span>
+
+              {userLogin.hoTen}
+              <button
+                className="self-center px-8 py-3 rounded"
+                // onClick={dangXuat}
+              >
+                Đăng xuất
+              </button>
+            </div>
+            <button className="p-4 lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                className="w-6 h-6 dark:text-gray-100"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
+        </Header>
         <Content
           style={{
             margin: "0 16px",

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const initialState = {
   movieList: [],
@@ -53,6 +54,29 @@ export const { reducer: quanLyPhimReducer, actions: quanLyPhimActions } =
           state.isFetching = false;
           state.error = action.payload;
         });
+
+      // Thêm phim upload hình
+      builder
+        .addCase(themPhimUploadHinh.pending, (state, action) => {
+          state.isFetching = true;
+        })
+        .addCase(themPhimUploadHinh.fulfilled, (state, action) => {
+          state.isFetching = false;
+          console.log(action.payload);
+          Swal.fire("Thành Công!", "Bạn đã thêm phim thành công!", "success");
+          localStorage.setItem("USER_LOGIN", JSON.stringify(action.payload));
+        })
+        .addCase(themPhimUploadHinh.rejected, (state, action) => {
+          state.error = action.payload;
+
+          state.isFetching = false;
+          Swal.fire({
+            icon: "error",
+            title: "Thất bại...",
+            text: action.payload.content,
+            footer: '<a href="">Xin cảm ơn</a>',
+          });
+        });
     },
   });
 
@@ -99,7 +123,7 @@ export const getCinemaList = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const result = await axios({
-        url: "https://movienew.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=GP01",
+        url: "https://movienew.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=GP13",
         method: "GET",
         headers: {
           TokenCyberSoft:
@@ -108,6 +132,29 @@ export const getCinemaList = createAsyncThunk(
       });
       return result.data.content;
     } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const themPhimUploadHinh = createAsyncThunk(
+  "quanLyPhim/themPhimUploadHinh",
+  async (data, { rejectWithValue }) => {
+    try {
+      const result = await axios({
+        url: "https://movienew.cybersoft.edu.vn/api/QuanLyPhim/ThemPhimUploadHinh",
+        method: "POST",
+        headers: {
+          TokenCyberSoft:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzMkUiLCJIZXRIYW5TdHJpbmciOiIyMC8wMy8yMDIzIiwiSGV0SGFuVGltZSI6IjE2NzkyNzA0MDAwMDAiLCJuYmYiOjE2NTA0NzQwMDAsImV4cCI6MTY3OTQxODAwMH0.S7l5kogAVJjRW8mjJ5gosJraYq5ahYjrBwnMJAaGxlY",
+        },
+        data,
+      });
+      console.log("cong cong");
+      return result.data.content;
+    } catch (err) {
+      console.log(data);
+      console.log("error: ", err.response.data);
       return rejectWithValue(err.response.data);
     }
   }
