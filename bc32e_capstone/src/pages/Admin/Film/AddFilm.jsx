@@ -1,3 +1,4 @@
+import { FileImageOutlined } from "@ant-design/icons";
 import moment from "moment";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -24,7 +25,7 @@ const AddFilm = () => {
       dangChieu: true,
       hot: true,
       danhGia: 10,
-      hinhAnh: "",
+      hinhAnh: null,
     },
   });
 
@@ -42,8 +43,6 @@ const AddFilm = () => {
   const onSubmit = (data) => {
     data.ngayKhoiChieu = moment(data.ngayKhoiChieu).format("DD-MM-YYYY");
     data.dangChieu = !data.sapChieu;
-    // data.hinhAnh = data.hinhAnh[0].name;
-    console.log(data);
 
     // Tạo đối tượng formdata
     let formData = new FormData();
@@ -91,9 +90,7 @@ const AddFilm = () => {
             <select
               id="maNhom"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              {...register("maNhom", {
-                // required: "Không được bỏ trống",
-              })}
+              {...register("maNhom", {})}
             >
               <option>GP00</option>
               <option>GP01</option>
@@ -205,12 +202,17 @@ const AddFilm = () => {
               })}
               onChange={handleImg}
             />
-            <img
-              className="inline ml-3"
-              width={150}
-              src={imgUpload}
-              alt="..."
-            />
+            {imgUpload ? (
+              <img
+                width={150}
+                src={imgUpload}
+                alt="movie"
+                className="img-fluid rounded inline ml-3"
+              />
+            ) : (
+              <FileImageOutlined style={{ fontSize: 60 }} />
+            )}
+
             {errors?.hinhAnh?.message && (
               <p className="text-red-400 mt-2">{errors?.hinhAnh?.message}</p>
             )}

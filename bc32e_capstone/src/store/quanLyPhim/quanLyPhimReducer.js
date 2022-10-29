@@ -101,9 +101,32 @@ export const { reducer: quanLyPhimReducer, actions: quanLyPhimActions } =
           state.isFetching = false;
           console.log(action.payload);
           Swal.fire("Thành Công!", "Bạn đã xóa phim thành công!", "success");
-          // getMovieList();
         })
         .addCase(xoaPhim.rejected, (state, action) => {
+          state.error = action.payload;
+          state.isFetching = false;
+          Swal.fire({
+            icon: "error",
+            title: "Thất bại...",
+            text: action.payload.content,
+            footer: '<a href="">Xin cảm ơn</a>',
+          });
+        })
+
+        // Cập nhật phim Upload
+        .addCase(updateMovie.pending, (state, action) => {
+          state.isFetching = true;
+        })
+        .addCase(updateMovie.fulfilled, (state, action) => {
+          state.isFetching = false;
+          console.log(action.payload);
+          Swal.fire(
+            "Thành Công!",
+            "Bạn đã cập nhật phim thành công!",
+            "success"
+          );
+        })
+        .addCase(updateMovie.rejected, (state, action) => {
           state.error = action.payload;
           state.isFetching = false;
           Swal.fire({
@@ -166,6 +189,7 @@ export const getMovieDetail = createAsyncThunk(
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzMkUiLCJIZXRIYW5TdHJpbmciOiIyMC8wMy8yMDIzIiwiSGV0SGFuVGltZSI6IjE2NzkyNzA0MDAwMDAiLCJuYmYiOjE2NTA0NzQwMDAsImV4cCI6MTY3OTQxODAwMH0.S7l5kogAVJjRW8mjJ5gosJraYq5ahYjrBwnMJAaGxlY",
         },
       });
+      console.log(result.data.content);
       return result.data.content;
     } catch (err) {
       return rejectWithValue(err.respone.data);
@@ -186,11 +210,8 @@ export const themPhimUploadHinh = createAsyncThunk(
         },
         data,
       });
-      console.log("cong cong");
       return result.data.content;
     } catch (err) {
-      console.log(data);
-      console.log("error: ", err.response.data);
       return rejectWithValue(err.response.data);
     }
   }
@@ -209,12 +230,30 @@ export const xoaPhim = createAsyncThunk(
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzMkUiLCJIZXRIYW5TdHJpbmciOiIyMC8wMy8yMDIzIiwiSGV0SGFuVGltZSI6IjE2NzkyNzA0MDAwMDAiLCJuYmYiOjE2NTA0NzQwMDAsImV4cCI6MTY3OTQxODAwMH0.S7l5kogAVJjRW8mjJ5gosJraYq5ahYjrBwnMJAaGxlY",
         },
       });
-      console.log("cong cong");
       dispatch(getMovieList());
       return result.data.content;
     } catch (err) {
-      console.log(maPhim);
-      console.log("error: ", err.response.data);
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const updateMovie = createAsyncThunk(
+  "quanLyPhim/updateMovie",
+  async (data, { dispatch, getState, rejectWithValue }) => {
+    try {
+      const result = await axios({
+        url: "https://movienew.cybersoft.edu.vn/api/QuanLyPhim/CapNhatPhimUpload",
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("TOKEN"),
+          TokenCyberSoft:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzMkUiLCJIZXRIYW5TdHJpbmciOiIyMC8wMy8yMDIzIiwiSGV0SGFuVGltZSI6IjE2NzkyNzA0MDAwMDAiLCJuYmYiOjE2NTA0NzQwMDAsImV4cCI6MTY3OTQxODAwMH0.S7l5kogAVJjRW8mjJ5gosJraYq5ahYjrBwnMJAaGxlY",
+        },
+        data,
+      });
+      return result.data.content;
+    } catch (err) {
       return rejectWithValue(err.response.data);
     }
   }

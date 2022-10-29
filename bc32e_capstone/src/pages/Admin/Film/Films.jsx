@@ -18,7 +18,6 @@ import Swal from "sweetalert2";
 
 const Films = () => {
   const { movieList } = useQuanLyPhim();
-  console.log("movieList: ", movieList);
 
   const dispatch = useDispatch();
   useEffect(() => {
