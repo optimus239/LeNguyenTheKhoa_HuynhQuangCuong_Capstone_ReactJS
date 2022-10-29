@@ -1,6 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Button, Input, Space, Table } from "antd";
-import { getMovieList, useQuanLyPhim } from "../../../store/quanLyPhim";
+import {
+  getMovieList,
+  useQuanLyPhim,
+  xoaPhim,
+} from "../../../store/quanLyPhim";
 import { useDispatch } from "react-redux";
 import {
   SearchOutlined,
@@ -10,10 +14,12 @@ import {
 import { removeVietnameseTones } from "../../../ultis/convertAlphabetToAlphanumeric";
 import { NavLink } from "react-router-dom";
 import Highlighter from "react-highlight-words";
+import Swal from "sweetalert2";
 
 const Films = () => {
   const { movieList } = useQuanLyPhim();
   console.log("movieList: ", movieList);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getMovieList());
@@ -130,7 +136,7 @@ const Films = () => {
       dataIndex: "maPhim",
       width: 130,
       key: "maPhim",
-      ...getColumnSearchProps("Mã Phim"),
+      ...getColumnSearchProps("maPhim"),
       // specify the condition of filtering result
       // here is that finding the name started with `value`
 
@@ -151,7 +157,7 @@ const Films = () => {
       dataIndex: "tenPhim",
       width: 200,
       key: "tenPhim",
-      ...getColumnSearchProps("Tên Phim"),
+      ...getColumnSearchProps("tenPhim"),
       onFilter: (value, record) => record.tenPhim.indexOf(value) === 0,
       sorter: (a, b) => {
         let tenPhimA = removeVietnameseTones(a.tenPhim.toLowerCase());
@@ -172,14 +178,35 @@ const Films = () => {
     },
     {
       title: "Hành động",
-      dataIndex: "action",
+      dataIndex: "maPhim",
       render: (text, record, index) => {
         return (
           <div>
-            <span className="text-xl text-green-400 hover:text-red-400 mr-2">
+            <NavLink
+              to={`edit/${record.maPhim}`}
+              className="text-xl text-green-400 hover:text-red-400 mr-2"
+            >
               <EditOutlined />
-            </span>
-            <span className="text-xl text-gray-400 hover:text-red-400">
+            </NavLink>
+            <span
+              style={{ cursor: "pointer" }}
+              className="text-xl text-gray-400 hover:text-red-400"
+              onClick={() => {
+                Swal.fire({
+                  title: "Are you sure?",
+                  text: "You won't be able to revert this!",
+                  icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  confirmButtonText: "Yes, delete it!",
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    dispatch(xoaPhim(record.maPhim));
+                  }
+                });
+              }}
+            >
               <DeleteOutlined />
             </span>
           </div>

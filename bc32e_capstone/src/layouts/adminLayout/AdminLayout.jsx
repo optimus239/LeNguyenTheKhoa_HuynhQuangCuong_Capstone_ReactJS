@@ -34,12 +34,18 @@ const items = [
 
 const AdminLayout = () => {
   const { userLogin } = useQuanLyNguoiDung();
+
   const navigate = useNavigate();
+  // if (!userLogin) {
+  //   console.log("gì dọ");
+  //   navigate("/home");
+  // }
   useEffect(() => {
-    if (!userLogin || userLogin.maLoaiNguoiDung !== "QuanTri") {
+    if (!userLogin) {
+      console.log("gì dọ");
       navigate("/home");
     }
-  });
+  }, [userLogin]);
   const [collapsed, setCollapsed] = useState(false);
   return (
     <Layout
@@ -78,7 +84,7 @@ const AdminLayout = () => {
                 />
               </span>
 
-              {userLogin.hoTen}
+              {userLogin?.hoTen}
               <button
                 className="self-center px-8 py-3 rounded"
                 // onClick={dangXuat}

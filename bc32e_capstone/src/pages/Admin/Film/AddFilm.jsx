@@ -2,11 +2,12 @@ import moment from "moment";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { themPhimUploadHinh } from "../../../store/quanLyPhim/quanLyPhimReducer";
+import { themPhimUploadHinh } from "../../../store/quanLyPhim";
 
 const AddFilm = () => {
   const [imgUpload, setImgUpload] = useState(null);
   const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
@@ -26,7 +27,6 @@ const AddFilm = () => {
       hinhAnh: "",
     },
   });
-  // console.log("errors", errors);
 
   const handleImg = (e) => {
     let file = e.target.files[0];
@@ -54,9 +54,7 @@ const AddFilm = () => {
         formData.append("File", data.hinhAnh[0], data.hinhAnh[0].name);
       }
     }
-
-    const res = dispatch(themPhimUploadHinh(formData));
-    console.log(res);
+    dispatch(themPhimUploadHinh(formData));
   };
   return (
     <div>

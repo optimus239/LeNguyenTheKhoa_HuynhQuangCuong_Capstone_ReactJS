@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { redirect } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const initialState = {
@@ -18,6 +19,7 @@ export const { reducer: quanLyPhimReducer, actions: quanLyPhimActions } =
     reducers: {},
     extraReducers: (builder) => {
       builder
+        // getMovieList
         .addCase(getMovieList.pending, (state, action) => {
           state.isFetching = true;
         })
@@ -28,12 +30,12 @@ export const { reducer: quanLyPhimReducer, actions: quanLyPhimActions } =
         .addCase(getMovieList.rejected, (state, action) => {
           state.isFetching = false;
           state.error = action.payload;
-        });
-      builder.addCase(getCarouselList.pending, (state, action) => {
-        state.isFetching = true;
-      });
+        })
 
-      builder
+        // getCarouselList
+        .addCase(getCarouselList.pending, (state, action) => {
+          state.isFetching = true;
+        })
         .addCase(getCarouselList.fulfilled, (state, action) => {
           state.isFetching = false;
           state.carouselList = action.payload;
@@ -41,55 +43,76 @@ export const { reducer: quanLyPhimReducer, actions: quanLyPhimActions } =
         .addCase(getCarouselList.rejected, (state, action) => {
           state.isFetching = false;
           state.error = action.payload;
-        });
+        })
 
-      builder.addCase(getMovieDetail.pending, (state, action) => {
-        state.isFetching = true;
-      });
-      builder.addCase(getMovieDetail.fulfilled, (state, action) => {
-        state.isFetching = false;
-        state.movieDetail = action.payload;
-      });
-      builder.addCase(getMovieDetail.rejected, (state, action) => {
-        state.isFetching = false;
-        state.error = action.payload;
+        // getMovieDetail
+        .addCase(getMovieDetail.pending, (state, action) => {
+          state.isFetching = true;
+        })
+        .addCase(getMovieDetail.fulfilled, (state, action) => {
+          state.isFetching = false;
+          state.movieDetail = action.payload;
+        })
+        .addCase(getMovieDetail.rejected, (state, action) => {
+          state.isFetching = false;
+          state.error = action.payload;
+        })
 
-        builder
-          .addCase(getCinemaList.pending, (state, action) => {
-            state.isFetching = true;
-          })
-          .addCase(getCinemaList.fulfilled, (state, action) => {
-            state.isFetching = false;
-            state.cinemaList = action.payload;
-          })
-          .addCase(getCinemaList.rejected, (state, action) => {
-            state.isFetching = false;
-            state.error = action.payload;
-          });
+        // getCinemaList
+        // .addCase(getCinemaList.pending, (state, action) => {
+        //   state.isFetching = true;
+        // })
+        // .addCase(getCinemaList.fulfilled, (state, action) => {
+        //   state.isFetching = false;
+        //   state.cinemaList = action.payload;
+        // })
+        // .addCase(getCinemaList.rejected, (state, action) => {
+        //   state.isFetching = false;
+        //   state.error = action.payload;
+        // })
 
         // Thêm phim upload hình
-        builder
-          .addCase(themPhimUploadHinh.pending, (state, action) => {
-            state.isFetching = true;
-          })
-          .addCase(themPhimUploadHinh.fulfilled, (state, action) => {
-            state.isFetching = false;
-            console.log(action.payload);
-            Swal.fire("Thành Công!", "Bạn đã thêm phim thành công!", "success");
-            localStorage.setItem("USER_LOGIN", JSON.stringify(action.payload));
-          })
-          .addCase(themPhimUploadHinh.rejected, (state, action) => {
-            state.error = action.payload;
-
-            state.isFetching = false;
-            Swal.fire({
-              icon: "error",
-              title: "Thất bại...",
-              text: action.payload.content,
-              footer: '<a href="">Xin cảm ơn</a>',
-            });
+        .addCase(themPhimUploadHinh.pending, (state, action) => {
+          state.isFetching = true;
+        })
+        .addCase(themPhimUploadHinh.fulfilled, (state, action) => {
+          state.isFetching = false;
+          console.log(action.payload);
+          Swal.fire("Thành Công!", "Bạn đã thêm phim thành công!", "success");
+          localStorage.setItem("USER_LOGIN", JSON.stringify(action.payload));
+          redirect("/admin/films");
+        })
+        .addCase(themPhimUploadHinh.rejected, (state, action) => {
+          state.error = action.payload;
+          state.isFetching = false;
+          Swal.fire({
+            icon: "error",
+            title: "Thất bại...",
+            text: action.payload.content,
+            footer: '<a href="">Xin cảm ơn</a>',
           });
-      });
+        })
+
+        // Xóa phim
+        .addCase(xoaPhim.pending, (state, action) => {
+          state.isFetching = true;
+        })
+        .addCase(xoaPhim.fulfilled, (state, action) => {
+          state.isFetching = false;
+          console.log(action.payload);
+          Swal.fire("Thành Công!", "Bạn đã xóa phim thành công!", "success");
+          // getMovieList();
+        })
+        .addCase(xoaPhim.rejected, (state, action) => {
+          state.error = action.payload;
+          state.isFetching = false;
+          Swal.fire({
+            icon: "error",
+            title: "Thất bại...",
+            text: action.payload.content,
+            footer: '<a href="">Xin cảm ơn</a>',
+          });
+        });
     },
   });
 
@@ -152,7 +175,7 @@ export const getMovieDetail = createAsyncThunk(
 
 export const themPhimUploadHinh = createAsyncThunk(
   "quanLyPhim/themPhimUploadHinh",
-  async (data, { rejectWithValue }) => {
+  async (data, { dispatch, getState, rejectWithValue }) => {
     try {
       const result = await axios({
         url: "https://movienew.cybersoft.edu.vn/api/QuanLyPhim/ThemPhimUploadHinh",
@@ -167,6 +190,30 @@ export const themPhimUploadHinh = createAsyncThunk(
       return result.data.content;
     } catch (err) {
       console.log(data);
+      console.log("error: ", err.response.data);
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const xoaPhim = createAsyncThunk(
+  "quanLyPhim/xoaPhim",
+  async (maPhim, { dispatch, getState, rejectWithValue }) => {
+    try {
+      const result = await axios({
+        url: `https://movienew.cybersoft.edu.vn/api/QuanLyPhim/XoaPhim?MaPhim=${maPhim}`,
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("TOKEN"),
+          TokenCyberSoft:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzMkUiLCJIZXRIYW5TdHJpbmciOiIyMC8wMy8yMDIzIiwiSGV0SGFuVGltZSI6IjE2NzkyNzA0MDAwMDAiLCJuYmYiOjE2NTA0NzQwMDAsImV4cCI6MTY3OTQxODAwMH0.S7l5kogAVJjRW8mjJ5gosJraYq5ahYjrBwnMJAaGxlY",
+        },
+      });
+      console.log("cong cong");
+      dispatch(getMovieList());
+      return result.data.content;
+    } catch (err) {
+      console.log(maPhim);
       console.log("error: ", err.response.data);
       return rejectWithValue(err.response.data);
     }

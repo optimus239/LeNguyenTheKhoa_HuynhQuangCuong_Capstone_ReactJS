@@ -11,6 +11,7 @@ import Login from "../pages/login/Login";
 import MovieDetail from "../pages/movieDetail/MovieDetail";
 import Register from "../pages/register/Register";
 import AddFilm from "../pages/Admin/Film/AddFilm";
+import EditFilm from "../pages/Admin/Film/EditFilm";
 
 const Routers = () => {
   const routing = useRoutes([
@@ -42,10 +43,10 @@ const Routers = () => {
       path: "/admin",
       element: <AdminLayout />,
       children: [
-        {
-          path: "/admin",
-          element: <Films />,
-        },
+        // {
+        //   path: "/admin",
+        //   element: <Films />,
+        // },
         {
           path: "films",
           element: <Films />,
@@ -53,6 +54,10 @@ const Routers = () => {
         {
           path: "films/addfilm",
           element: <AddFilm />,
+        },
+        {
+          path: "films/edit/:id",
+          element: <EditFilm />,
         },
       ],
     },

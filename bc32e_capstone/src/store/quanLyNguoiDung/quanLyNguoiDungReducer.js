@@ -41,7 +41,8 @@ export const {
         localStorage.setItem("USER_LOGIN", JSON.stringify(action.payload));
         localStorage.setItem(
           "TOKEN",
-          JSON.stringify(action.payload.accessToken)
+          action.payload.accessToken
+          // JSON.stringify(action.payload.accessToken)
         );
         state.userLogin = action.payload;
       })
