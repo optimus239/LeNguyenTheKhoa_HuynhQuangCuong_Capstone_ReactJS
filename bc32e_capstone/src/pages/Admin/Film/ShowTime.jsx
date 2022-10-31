@@ -114,94 +114,101 @@ const ShowTime = () => {
   };
   const onFinishFailed = (errorInfo) => {};
   return (
-    <Form
-      name="basic"
-      labelCol={{ span: 8 }}
-      wrapperCol={{ span: 16 }}
-      //   initialValues={{ maPhim: params.id }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-      //   onValuesChange={onValuesChange}
-      autoComplete="off"
-    >
-      <h2>Tạo lịch chiếu - {film.tenPhim}</h2>
-      <img src={film.hinhAnh} alt="..." width={150} />
-      <Form.Item label="Hệ thống rạp">
-        <Select
-          //   defaultValue={state.heThongRapChieu[0]?.tenHeThongRap}
-          style={{
-            width: 210,
-          }}
-          placeholder="Chọn hệ thống rạp"
-          onChange={handleHeThongRapChieu}
+    <div className="flex ">
+      <div className="w-2/5">
+        <h2>Tạo lịch chiếu - {film.tenPhim}</h2>
+        <img src={film.hinhAnh} alt="..." width={150} />
+      </div>
+      <Form
+        name="basic"
+        labelCol={{ span: 8 }}
+        wrapperCol={{ span: 16 }}
+        //   initialValues={{ maPhim: params.id }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        //   onValuesChange={onValuesChange}
+        autoComplete="off"
+      >
+        <Form.Item label="Hệ thống rạp">
+          <Select
+            //   defaultValue={state.heThongRapChieu[0]?.tenHeThongRap}
+            style={{
+              width: 210,
+            }}
+            placeholder="Chọn hệ thống rạp"
+            onChange={handleHeThongRapChieu}
+          >
+            {state.heThongRapChieu.map((item, index) => (
+              <Option key={index} value={item.maHeThongRap}>
+                {item.tenHeThongRap}
+              </Option>
+            ))}
+          </Select>
+        </Form.Item>
+
+        <Form.Item
+          label="Cụm rạp"
+          name="maRap"
+          rules={[{ required: true, message: "Vui lòng chọn cụm rạp!" }]}
         >
-          {state.heThongRapChieu.map((item, index) => (
-            <Option key={index} value={item.maHeThongRap}>
-              {item.tenHeThongRap}
-            </Option>
-          ))}
-        </Select>
-      </Form.Item>
+          <Select
+            style={{
+              width: 210,
+            }}
+            placeholder="Chọn cụm rạp"
+            onChange={handleCumRapChieu}
+          >
+            {state.cumRapChieu.map((item, index) => (
+              <Option key={index} value={item.maCumRap}>
+                {item.tenCumRap}
+              </Option>
+            ))}
+          </Select>
+        </Form.Item>
 
-      <Form.Item
-        label="Cụm rạp"
-        name="maRap"
-        rules={[{ required: true, message: "Vui lòng chọn cụm rạp!" }]}
-      >
-        <Select
-          style={{
-            width: 210,
-          }}
-          placeholder="Chọn cụm rạp"
-          onChange={handleCumRapChieu}
+        <Form.Item
+          label="Ngày chiếu giờ chiếu"
+          name="ngayChieuGioChieu"
+          rules={[
+            {
+              required: true,
+              message: "Vui lòng chọn ngày chiếu và giờ chiếu!",
+            },
+          ]}
         >
-          {state.cumRapChieu.map((item, index) => (
-            <Option key={index} value={item.maCumRap}>
-              {item.tenCumRap}
-            </Option>
-          ))}
-        </Select>
-      </Form.Item>
+          <DatePicker
+            showTime
+            label="ngayChieu"
+            format="DD/MM/YYYY hh:mm:ss"
+            onChange={onChangeDate}
+            onOk={onOk}
+            placeholder="Chọn ngày giờ chiếu"
+          />
+        </Form.Item>
+        <Form.Item
+          label="Giá vé"
+          name="giaVe"
+          rules={[{ required: true, message: "Vui lòng điền giá vé!" }]}
+        >
+          <InputNumber
+            min={75000}
+            max={150000}
+            //   defaultValue={75000}
+            formatter={(value) =>
+              `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+            }
+            parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
+            onChange={onChangeNumber}
+          />
+        </Form.Item>
 
-      <Form.Item
-        label="Ngày chiếu giờ chiếu"
-        name="ngayChieuGioChieu"
-        rules={[
-          { required: true, message: "Vui lòng chọn ngày chiếu và giờ chiếu!" },
-        ]}
-      >
-        <DatePicker
-          showTime
-          label="ngayChieu"
-          format="DD/MM/YYYY hh:mm:ss"
-          onChange={onChangeDate}
-          onOk={onOk}
-          placeholder="Chọn ngày giờ chiếu"
-        />
-      </Form.Item>
-      <Form.Item
-        label="Giá vé"
-        name="giaVe"
-        rules={[{ required: true, message: "Vui lòng điền giá vé!" }]}
-      >
-        <InputNumber
-          min={75000}
-          max={150000}
-          //   defaultValue={75000}
-          formatter={(value) =>
-            `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-          }
-          parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
-          onChange={onChangeNumber}
-        />
-      </Form.Item>
-
-      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit">
-          Tạo lịch chiếu
-        </Button>
-      </Form.Item>
-    </Form>
+        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+          <Button type="primary" htmlType="submit">
+            Tạo lịch chiếu
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
   );
 };
 

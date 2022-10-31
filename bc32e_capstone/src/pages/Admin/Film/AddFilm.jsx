@@ -24,7 +24,7 @@ const AddFilm = () => {
       sapChieu: false,
       dangChieu: true,
       hot: true,
-      danhGia: 10,
+      danhGia: 5,
       hinhAnh: null,
     },
   });
