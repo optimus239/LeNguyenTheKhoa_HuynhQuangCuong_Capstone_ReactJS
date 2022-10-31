@@ -4,23 +4,62 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { logOut, useQuanLyNguoiDung } from "../store/quanLyNguoiDung";
+import { Dropdown, Menu, Space } from "antd";
 
 const Header = () => {
   const { userLogin } = useQuanLyNguoiDung();
   console.log("userLogin: ", userLogin);
-  const [navbarOpen, setNavbarOpen] = useState(false);
-  console.log("navbarOpen: ", navbarOpen);
   const dispatch = useDispatch();
   const dangXuat = () => {
     dispatch(logOut());
   };
+  const [navbarOpen, setNavbarOpen] = useState(false);
+
+  // Menudropdown
+
+  const item = [
+    {
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.antgroup.com"
+        >
+          Tài Khoản
+        </a>
+      ),
+      key: "0",
+    },
+    userLogin?.maLoaiNguoiDung === "QuanTri"
+      ? {
+          label: (
+            <Link rel="noopener noreferrer" to="/admin">
+              Quản trị
+            </Link>
+          ),
+          key: "1",
+        }
+      : undefined,
+    {
+      type: "divider",
+    },
+    {
+      label: <span onClick={dangXuat}>Đăng xuất</span>,
+      key: "3",
+      // disabled: true,
+    },
+  ];
+  const menu = <Menu items={item} />;
+
+  console.log("navbarOpen: ", navbarOpen);
+
   const titleRef = useRef();
   console.log("navbarOpen: ", navbarOpen);
   const navigate = useNavigate();
   return (
     <>
       <Navbar
-        className="flex flex-wrap items-center justify-between px-2 py-5 z-10 w-full"
+        className="flex flex-wrap items-center justify-between px-2 py-3 z-10 w-full"
         style={{ backgroundColor: "rgb(33, 33, 33)" }}
       >
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
@@ -82,22 +121,45 @@ const Header = () => {
             </ul>
           </div>
           <div className="flex">
-            <button
-              className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-              onClick={() => {
-                navigate("/register");
-              }}
-            >
-              Đăng ký
-            </button>
-            <button
-              className="ml-3 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-              onClick={() => {
-                navigate("/login");
-              }}
-            >
-              Đăng nhập
-            </button>
+            {userLogin ? (
+              <div className="px-3 flex items-center text-xs uppercase font-bold  text-white ">
+                <span className="mr-2">Xin Chào</span>
+                <Dropdown overlay={menu} placement="bottomLeft" arrow>
+                  <a onClick={(e) => e.preventDefault()}>
+                    <Space>
+                      <span className="flex items-center">
+                        <img
+                          className="w-full rounded-full"
+                          src="https://api.lorem.space/image/game?w=50&h=50"
+                          alt="..."
+                        />
+                      </span>
+
+                      {userLogin?.hoTen}
+                    </Space>
+                  </a>
+                </Dropdown>
+              </div>
+            ) : (
+              <>
+                <button
+                  className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                  onClick={() => {
+                    navigate("/register");
+                  }}
+                >
+                  Đăng ký
+                </button>
+                <button
+                  className="ml-3 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                  onClick={() => {
+                    navigate("/login");
+                  }}
+                >
+                  Đăng nhập
+                </button>
+              </>
+            )}
           </div>
         </div>
       </Navbar>

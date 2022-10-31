@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./AdminLayout.css";
 
-import {
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
-import { Breadcrumb, Layout, Menu } from "antd";
+import { PieChartOutlined, VideoCameraOutlined } from "@ant-design/icons";
+import { Breadcrumb, Layout, Dropdown, Menu, Space } from "antd";
+
 // import React, { useState } from "react";
 
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { useQuanLyNguoiDung } from "../../store/quanLyNguoiDung";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
+import { logOut, useQuanLyNguoiDung } from "../../store/quanLyNguoiDung";
+import { useDispatch } from "react-redux";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -27,32 +23,70 @@ function getItem(label, key, icon, children) {
 
 const items = [
   getItem(
+    <NavLink to="/home">
+      <img
+        src="https://cyberlearn.vn/wp-content/uploads/2020/03/cyberlearn-min-new-opt2.png"
+        alt="..."
+      />
+    </NavLink>,
+    "1"
+  ),
+  getItem(
     <NavLink to="/admin/users">Users</NavLink>,
-    "1",
+    "2",
     <PieChartOutlined />
   ),
-  getItem("Option 2", "2", <DesktopOutlined />),
-  getItem("Film Manager", "3", <UserOutlined />, [
+
+  getItem("Film Manager", "3", <VideoCameraOutlined />, [
     getItem(<NavLink to="/admin/films">Films</NavLink>, "31"),
     getItem(<NavLink to="/admin/films/addfilm">Add Film</NavLink>, "32"),
-    getItem("Alex", "33"),
   ]),
-  getItem("Team", "4", <TeamOutlined />, [
-    getItem("Team 1", "41"),
-    getItem("Team 2", "42"),
-  ]),
-  getItem("Files", "5", <FileOutlined />),
 ];
 
 const AdminLayout = () => {
   const { userLogin } = useQuanLyNguoiDung();
+
   const navigate = useNavigate();
+  // if (!userLogin) {
+  //   console.log("gì dọ");
+  //   navigate("/home");
+  // }
   useEffect(() => {
-    if (!userLogin || userLogin.maLoaiNguoiDung !== "QuanTri") {
+    if (!userLogin) {
+      console.log("gì dọ");
       navigate("/home");
     }
-  });
+  }, [userLogin]);
   const [collapsed, setCollapsed] = useState(false);
+  const dispatch = useDispatch();
+  const dangXuat = () => {
+    dispatch(logOut());
+  };
+  // Menudropdown
+
+  const item = [
+    {
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.antgroup.com"
+        >
+          Tài Khoản
+        </a>
+      ),
+      key: "0",
+    },
+    {
+      type: "divider",
+    },
+    {
+      label: <span onClick={dangXuat}>Đăng xuất</span>,
+      key: "3",
+      // disabled: true,
+    },
+  ];
+  const menu = <Menu items={item} />;
   return (
     <Layout
       style={{
@@ -78,7 +112,49 @@ const AdminLayout = () => {
           style={{
             padding: 0,
           }}
-        />
+        >
+          <div className="container text-right px-4 mx-auto flex flex-wrap items-center justify-end uppercase font-bold">
+            <div className="items-center text-blue-400 flex-shrink-0 hidden lg:flex">
+              <span className="mr-2">Xin Chào</span>
+              <Dropdown
+                overlay={menu}
+                placement="bottomLeft"
+                arrow
+                className="flex items-center"
+              >
+                <a onClick={(e) => e.preventDefault()}>
+                  <Space>
+                    <span className="flex items-center">
+                      <img
+                        className="w-full rounded-full"
+                        src="https://api.lorem.space/image/game?w=50&h=50"
+                        alt="..."
+                      />
+                    </span>
+
+                    {userLogin?.hoTen}
+                  </Space>
+                </a>
+              </Dropdown>
+            </div>
+            <button className="p-4 lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                className="w-6 h-6 dark:text-gray-100"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
+        </Header>
         <Content
           style={{
             margin: "0 16px",

@@ -23,11 +23,9 @@ export const {
   // Xử lý những action đồng bộ
   reducers: {
     logOut: (state) => {
-      console.log("ê con dê");
       localStorage.removeItem("USER_LOGIN");
       localStorage.removeItem("TOKEN");
       state.userLogin = null;
-      // window.location.reload(false);
     },
   },
   // Xử lý những action bất đồng bộ (call API)
@@ -43,7 +41,8 @@ export const {
         localStorage.setItem("USER_LOGIN", JSON.stringify(action.payload));
         localStorage.setItem(
           "TOKEN",
-          JSON.stringify(action.payload.accessToken)
+          action.payload.accessToken
+          // JSON.stringify(action.payload.accessToken)
         );
         state.userLogin = action.payload;
       })
