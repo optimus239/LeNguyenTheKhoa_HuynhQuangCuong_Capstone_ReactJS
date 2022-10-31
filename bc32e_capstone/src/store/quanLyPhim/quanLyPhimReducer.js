@@ -58,19 +58,6 @@ export const { reducer: quanLyPhimReducer, actions: quanLyPhimActions } =
           state.error = action.payload;
         })
 
-        // getCinemaList
-        // .addCase(getCinemaList.pending, (state, action) => {
-        //   state.isFetching = true;
-        // })
-        // .addCase(getCinemaList.fulfilled, (state, action) => {
-        //   state.isFetching = false;
-        //   state.cinemaList = action.payload;
-        // })
-        // .addCase(getCinemaList.rejected, (state, action) => {
-        //   state.isFetching = false;
-        //   state.error = action.payload;
-        // })
-
         // Thêm phim upload hình
         .addCase(themPhimUploadHinh.pending, (state, action) => {
           state.isFetching = true;

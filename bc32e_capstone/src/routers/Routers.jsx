@@ -12,6 +12,7 @@ import MovieDetail from "../pages/movieDetail/MovieDetail";
 import Register from "../pages/register/Register";
 import AddFilm from "../pages/Admin/Film/AddFilm";
 import EditFilm from "../pages/Admin/Film/EditFilm";
+import ShowTime from "../pages/Admin/Film/ShowTime";
 
 const Routers = () => {
   const routing = useRoutes([
@@ -58,6 +59,10 @@ const Routers = () => {
         {
           path: "films/edit/:id",
           element: <EditFilm />,
+        },
+        {
+          path: "films/showtime/:id",
+          element: <ShowTime />,
         },
       ],
     },

@@ -8,10 +8,6 @@
   background: #fff;
 }
 
-.ant-layout-header {
-  height: 88px !important;
-}
-
 /* CHECKBOX TOGGLE SWITCH */
 /* @apply rules for documentation, these do not work as inline style */
 .toggle-checkbox:checked {

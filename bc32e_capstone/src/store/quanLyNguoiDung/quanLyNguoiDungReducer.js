@@ -22,7 +22,6 @@ export const {
   // Xử lý những action đồng bộ
   reducers: {
     logOut: (state) => {
-      console.log("ê con dê");
       localStorage.removeItem("USER_LOGIN");
       localStorage.removeItem("TOKEN");
       state.userLogin = null;

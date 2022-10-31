@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import "./AdminLayout.css";
 
 import { PieChartOutlined, VideoCameraOutlined } from "@ant-design/icons";
-import { Breadcrumb, Layout, Menu } from "antd";
+import { Breadcrumb, Layout, Dropdown, Menu, Space } from "antd";
+
 // import React, { useState } from "react";
 
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { useQuanLyNguoiDung } from "../../store/quanLyNguoiDung";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
+import { logOut, useQuanLyNguoiDung } from "../../store/quanLyNguoiDung";
+import { useDispatch } from "react-redux";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -21,8 +23,17 @@ function getItem(label, key, icon, children) {
 
 const items = [
   getItem(
+    <NavLink to="/home">
+      <img
+        src="https://cyberlearn.vn/wp-content/uploads/2020/03/cyberlearn-min-new-opt2.png"
+        alt="..."
+      />
+    </NavLink>,
+    "1"
+  ),
+  getItem(
     <NavLink to="/admin/users">Users</NavLink>,
-    "1",
+    "2",
     <PieChartOutlined />
   ),
 
@@ -47,6 +58,35 @@ const AdminLayout = () => {
     }
   }, [userLogin]);
   const [collapsed, setCollapsed] = useState(false);
+  const dispatch = useDispatch();
+  const dangXuat = () => {
+    dispatch(logOut());
+  };
+  // Menudropdown
+
+  const item = [
+    {
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.antgroup.com"
+        >
+          Tài Khoản
+        </a>
+      ),
+      key: "0",
+    },
+    {
+      type: "divider",
+    },
+    {
+      label: <span onClick={dangXuat}>Đăng xuất</span>,
+      key: "3",
+      // disabled: true,
+    },
+  ];
+  const menu = <Menu items={item} />;
   return (
     <Layout
       style={{
@@ -73,24 +113,29 @@ const AdminLayout = () => {
             padding: 0,
           }}
         >
-          <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
+          <div className="container text-right px-4 mx-auto flex flex-wrap items-center justify-end uppercase font-bold">
             <div className="items-center text-blue-400 flex-shrink-0 hidden lg:flex">
               <span className="mr-2">Xin Chào</span>
-              <span className="mr-2">
-                <img
-                  className="w-full rounded-full"
-                  src="https://api.lorem.space/image/game?w=50&h=50"
-                  alt="..."
-                />
-              </span>
-
-              {userLogin?.hoTen}
-              <button
-                className="self-center px-8 py-3 rounded"
-                // onClick={dangXuat}
+              <Dropdown
+                overlay={menu}
+                placement="bottomLeft"
+                arrow
+                className="flex items-center"
               >
-                Đăng xuất
-              </button>
+                <a onClick={(e) => e.preventDefault()}>
+                  <Space>
+                    <span className="flex items-center">
+                      <img
+                        className="w-full rounded-full"
+                        src="https://api.lorem.space/image/game?w=50&h=50"
+                        alt="..."
+                      />
+                    </span>
+
+                    {userLogin?.hoTen}
+                  </Space>
+                </a>
+              </Dropdown>
             </div>
             <button className="p-4 lg:hidden">
               <svg

@@ -10,6 +10,7 @@ import {
   SearchOutlined,
   DeleteOutlined,
   EditOutlined,
+  FundProjectionScreenOutlined,
 } from "@ant-design/icons";
 import { removeVietnameseTones } from "../../../ultis/convertAlphabetToAlphanumeric";
 import { NavLink } from "react-router-dom";
@@ -157,7 +158,7 @@ const Films = () => {
       width: 200,
       key: "tenPhim",
       ...getColumnSearchProps("tenPhim"),
-      onFilter: (value, record) => record.tenPhim.indexOf(value) === 0,
+      // onFilter: (value, record) => record.tenPhim.indexOf(value) === 0,
       sorter: (a, b) => {
         let tenPhimA = removeVietnameseTones(a.tenPhim.toLowerCase());
         let tenPhimB = removeVietnameseTones(b.tenPhim.toLowerCase());
@@ -189,7 +190,7 @@ const Films = () => {
             </NavLink>
             <span
               style={{ cursor: "pointer" }}
-              className="text-xl text-gray-400 hover:text-red-400"
+              className="text-xl text-gray-400 hover:text-red-400 mr-2"
               onClick={() => {
                 Swal.fire({
                   title: "Are you sure?",
@@ -208,6 +209,15 @@ const Films = () => {
             >
               <DeleteOutlined />
             </span>
+            <NavLink
+              to={`showtime/${record.maPhim}`}
+              className="text-xl text-blue-400 hover:text-red-400"
+              onClick={() => {
+                localStorage.setItem("filmparams", JSON.stringify(record));
+              }}
+            >
+              <FundProjectionScreenOutlined />
+            </NavLink>
           </div>
         );
       },

@@ -66,7 +66,7 @@ const EditFilm = () => {
   };
   return (
     <div>
-      <h3>Thêm phim mới</h3>
+      <h3>Cập nhật phim</h3>
       <form className="w-4/5 mx-auto" onSubmit={handleSubmit(onSubmit)}>
         <div className="grid md:grid-cols-2 md:gap-6">
           <div className="relative z-0 mb-6 w-full group">
@@ -213,6 +213,7 @@ const EditFilm = () => {
             <img
               width={100}
               src={imgUpload === "" ? movieDetail?.hinhAnh : imgUpload}
+              alt="..."
             />
             {errors?.hinhAnh?.message && (
               <p className="text-red-400 mt-2">{errors?.hinhAnh?.message}</p>
