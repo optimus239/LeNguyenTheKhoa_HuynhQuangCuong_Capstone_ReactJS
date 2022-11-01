@@ -202,7 +202,7 @@ const Checkout = () => {
           </div>
           <hr />
           <div className="mb-0 flex flex-col justify-end">
-            <div
+            <button
               className="bg-green-500 text-white w-full text-center py-3 font-bold text-lg"
               onClick={() => {
                 const inforCheckOut = {
@@ -214,7 +214,7 @@ const Checkout = () => {
               }}
             >
               Đặt vé
-            </div>
+            </button>
           </div>
         </div>
       </div>
