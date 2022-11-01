@@ -2,6 +2,7 @@ import React from "react";
 import { useRoutes } from "react-router-dom";
 import AdminLayout from "../layouts/adminLayout/AdminLayout";
 import Films from "../pages/Admin/Film/Films";
+
 import MainLayout from "../layouts/MainLayout";
 import NotFound from "../layouts/NotFound";
 import Checkout from "../pages/checkout/Checkout";
@@ -12,11 +13,6 @@ import Register from "../pages/register/Register";
 import AddFilm from "../pages/Admin/Film/AddFilm";
 import EditFilm from "../pages/Admin/Film/EditFilm";
 import ShowTime from "../pages/Admin/Film/ShowTime";
-import User from "../pages/Admin/User/User";
-import AddEditUser from "../pages/Admin/User/AddEditUser";
-import UserLayout from "../layouts/userlayout/UserLayout";
-import Info from "../pages/User/Info";
-import AddEditFilm from "../pages/Admin/Film/AddEditFilm";
 
 const Routers = () => {
   const routing = useRoutes([
@@ -65,38 +61,8 @@ const Routers = () => {
           element: <EditFilm />,
         },
         {
-          path: "films/addeditfilm",
-          element: <AddEditFilm />,
-        },
-        {
-          path: "films/addeditfilm/:id",
-          element: <AddEditFilm />,
-        },
-        {
           path: "films/showtime/:id",
           element: <ShowTime />,
-        },
-        {
-          path: "user",
-          element: <User />,
-        },
-        {
-          path: "user/addedituser",
-          element: <AddEditUser />,
-        },
-        {
-          path: "user/addedituser/:iduser",
-          element: <AddEditUser />,
-        },
-      ],
-    },
-    {
-      path: "/user",
-      element: <UserLayout />,
-      children: [
-        {
-          path: "info",
-          element: <Info />,
         },
       ],
     },

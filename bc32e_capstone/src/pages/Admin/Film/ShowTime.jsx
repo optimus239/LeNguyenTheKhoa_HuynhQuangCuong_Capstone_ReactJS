@@ -84,7 +84,7 @@ const ShowTime = () => {
 
     const fetchData = async () => {
       try {
-        await axios({
+        let result = await axios({
           url: "https://movienew.cybersoft.edu.vn/api/QuanLyDatVe/TaoLichChieu",
           method: "POST",
           headers: {
@@ -121,8 +121,8 @@ const ShowTime = () => {
       </div>
       <Form
         name="basic"
-        labelCol={{ span: 10 }}
-        wrapperCol={{ span: 14 }}
+        labelCol={{ span: 8 }}
+        wrapperCol={{ span: 16 }}
         //   initialValues={{ maPhim: params.id }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}

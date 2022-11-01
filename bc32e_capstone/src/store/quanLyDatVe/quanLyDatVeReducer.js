@@ -5,13 +5,29 @@ const initialState = {
   isFetching: false,
   seatList: [],
   error: undefined,
+  checkedList: [],
+  tabActive: "1",
 };
 
 export const { reducer: quanLyDatVeReducer, actions: quanLyDatVeActions } =
   createSlice({
     name: "quanLyDatVe",
     initialState,
-    reducers: {},
+    reducers: {
+      getCheckedList: (state, action) => {
+        let index = state.checkedList.findIndex(
+          (seat) => seat.maGhe === action.payload.maGhe
+        );
+        if (index !== -1) {
+          state.checkedList.splice(index, 1);
+        } else {
+          state.checkedList.push(action.payload);
+        }
+      },
+      changeKey: (state, action) => {
+        state.tabActive = action.payload.number;
+      },
+    },
     extraReducers: (builder) => {
       builder
         .addCase(getSeatList.pending, (state, action) => {
@@ -22,6 +38,20 @@ export const { reducer: quanLyDatVeReducer, actions: quanLyDatVeActions } =
           state.seatList = action.payload;
         })
         .addCase(getSeatList.rejected, (state, action) => {
+          state.isFetching = false;
+          state.error = action.payload;
+        });
+      builder
+        .addCase(postCheckOut.pending, (state, action) => {
+          state.isFetching = true;
+        })
+        .addCase(postCheckOut.fulfilled, (state, action) => {
+          state.isFetching = false;
+          console.log("actionpost", action.payload);
+          state.checkedList = [];
+          state.tabActive = "2";
+        })
+        .addCase(postCheckOut.rejected, (state, action) => {
           state.isFetching = false;
           state.error = action.payload;
         });
@@ -46,3 +76,27 @@ export const getSeatList = createAsyncThunk(
     }
   }
 );
+
+export const postCheckOut = createAsyncThunk(
+  "quanLyDatVe/postCheckOut",
+  async (data, { dispatch, rejectWithValue }) => {
+    try {
+      const result = await axios({
+        url: "https://movienew.cybersoft.edu.vn/api/QuanLyDatVe/DatVe",
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + JSON.parse(localStorage.getItem("TOKEN")),
+          TokenCyberSoft:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzMkUiLCJIZXRIYW5TdHJpbmciOiIyMC8wMy8yMDIzIiwiSGV0SGFuVGltZSI6IjE2NzkyNzA0MDAwMDAiLCJuYmYiOjE2NTA0NzQwMDAsImV4cCI6MTY3OTQxODAwMH0.S7l5kogAVJjRW8mjJ5gosJraYq5ahYjrBwnMJAaGxlY",
+        },
+        data,
+      });
+      await dispatch(getSeatList(data.maLichChieu));
+      return result.data.content;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const { getCheckedList, changeKey } = quanLyDatVeActions;
