@@ -30,11 +30,6 @@ const MovieDetail = () => {
     setMode(e.target.value);
   };
 
-  const gettoken = () => {
-    console.log("local", localStorage.getItem("TOKEN"));
-  };
-  gettoken();
-
   return (
     <div className="container mx-auto h-[1200px] relative ">
       <div
@@ -111,7 +106,7 @@ const MovieDetail = () => {
                             className="text-neutral-50 mr-5"
                             key={i}
                             onClick={() => {
-                              if (localStorage.getItem("USER_LOGIN")) {
+                              if (!localStorage.getItem("USER_LOGIN")) {
                                 return navigate(
                                   `/ticketroom/${lichChieu.maLichChieu}`
                                 );

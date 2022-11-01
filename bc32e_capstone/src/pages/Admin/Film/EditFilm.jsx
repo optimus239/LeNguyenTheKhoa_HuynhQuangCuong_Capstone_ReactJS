@@ -16,6 +16,16 @@ const EditFilm = () => {
   const dispatch = useDispatch();
   const params = useParams();
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    mode: "onBlur",
+    defaultValues: {},
+  });
+
   useEffect(() => {
     dispatch(getMovieDetail(params.id));
   }, []);
@@ -26,15 +36,6 @@ const EditFilm = () => {
       hinhAnh: null,
     });
   }, [movieDetail]);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm({
-    mode: "onBlur",
-    defaultValues: {},
-  });
 
   const handleImg = (e) => {
     let file = e.target.files[0];
@@ -49,7 +50,7 @@ const EditFilm = () => {
 
   const onSubmit = (data) => {
     data.ngayKhoiChieu = moment(data.ngayKhoiChieu).format("DD-MM-YYYY");
-    data.dangChieu = !data.sapChieu;
+    data.dangChieu = true;
 
     // Tạo đối tượng formdata
     let formData = new FormData();
@@ -232,7 +233,6 @@ const EditFilm = () => {
                 type="date"
                 id="tenPhim"
                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-                // placeholder="Ngày Khởi Chiếu"
                 {...register("ngayKhoiChieu", {
                   required: "Không được bỏ trống",
                 })}
