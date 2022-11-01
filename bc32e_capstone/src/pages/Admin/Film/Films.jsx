@@ -19,7 +19,7 @@ import Swal from "sweetalert2";
 
 const Films = () => {
   const { movieList } = useQuanLyPhim();
-  console.log("movieList: ", movieList);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getMovieList());
@@ -83,6 +83,19 @@ const Films = () => {
             }}
           >
             Reset
+          </Button>
+          <Button
+            type="link"
+            size="small"
+            onClick={() => {
+              confirm({
+                closeDropdown: false,
+              });
+              setSearchText(selectedKeys[0]);
+              setSearchedColumn(dataIndex);
+            }}
+          >
+            Filter
           </Button>
         </Space>
       </div>
@@ -216,9 +229,7 @@ const Films = () => {
     <div>
       <h3>Quản Lý Phim</h3>
       <NavLink to={"/admin/films/addfilm"}>
-        <Button type="primary" className="mb-2 hover:text-blue-500">
-          Thêm mới phim
-        </Button>
+        <Button className="mb-2 hover:text-blue-500">Thêm mới phim</Button>
       </NavLink>
       <Table rowKey="maPhim" columns={columns} dataSource={data} />
     </div>

@@ -31,10 +31,11 @@ const items = [
     </NavLink>,
     "1"
   ),
-  getItem("Users", "2", <PieChartOutlined />, [
-    getItem(<NavLink to="/admin/user">User List</NavLink>, "21"),
-    getItem(<NavLink to="/admin/user/addedituser">Add User</NavLink>, "22"),
-  ]),
+  getItem(
+    <NavLink to="/admin/users">Users</NavLink>,
+    "2",
+    <PieChartOutlined />
+  ),
 
   getItem("Film Manager", "3", <VideoCameraOutlined />, [
     getItem(<NavLink to="/admin/films">Films</NavLink>, "31"),
@@ -66,9 +67,13 @@ const AdminLayout = () => {
   const item = [
     {
       label: (
-        <Link rel="noopener noreferrer" to="/user">
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.antgroup.com"
+        >
           Tài Khoản
-        </Link>
+        </a>
       ),
       key: "0",
     },
@@ -89,14 +94,6 @@ const AdminLayout = () => {
       }}
     >
       <Sider
-        style={{
-          overflow: "auto",
-          height: "100vh",
-          position: "fixed",
-          left: 0,
-          top: 0,
-          bottom: 0,
-        }}
         collapsible
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
@@ -104,12 +101,12 @@ const AdminLayout = () => {
         <div className="logo" />
         <Menu
           theme="dark"
-          // defaultSelectedKeys={["3"]}
+          defaultSelectedKeys={["3"]}
           mode="inline"
           items={items}
         />
       </Sider>
-      <Layout className="site-layout" style={{ marginLeft: 200 }}>
+      <Layout className="site-layout">
         <Header
           className="site-layout-background"
           style={{
