@@ -47,7 +47,6 @@ export const { reducer: quanLyDatVeReducer, actions: quanLyDatVeActions } =
         })
         .addCase(postCheckOut.fulfilled, (state, action) => {
           state.isFetching = false;
-          console.log("actionpost", action.payload);
           state.checkedList = [];
           state.tabActive = "2";
         })
@@ -85,7 +84,7 @@ export const postCheckOut = createAsyncThunk(
         url: "https://movienew.cybersoft.edu.vn/api/QuanLyDatVe/DatVe",
         method: "POST",
         headers: {
-          Authorization: "Bearer " + JSON.parse(localStorage.getItem("TOKEN")),
+          Authorization: "Bearer " + localStorage.getItem("TOKEN"),
           TokenCyberSoft:
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCAzMkUiLCJIZXRIYW5TdHJpbmciOiIyMC8wMy8yMDIzIiwiSGV0SGFuVGltZSI6IjE2NzkyNzA0MDAwMDAiLCJuYmYiOjE2NTA0NzQwMDAsImV4cCI6MTY3OTQxODAwMH0.S7l5kogAVJjRW8mjJ5gosJraYq5ahYjrBwnMJAaGxlY",
         },
