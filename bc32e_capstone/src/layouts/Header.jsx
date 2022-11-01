@@ -20,13 +20,9 @@ const Header = () => {
   const item = [
     {
       label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.antgroup.com"
-        >
+        <Link rel="noopener noreferrer" to="/user">
           Tài Khoản
-        </a>
+        </Link>
       ),
       key: "0",
     },
@@ -60,10 +56,7 @@ const Header = () => {
     <>
       <Navbar
         className="flex flex-wrap items-center justify-between px-2 py-3 z-10 w-full"
-        style={{
-          backgroundColor: "rgb(33, 33, 33)",
-          boxShadow: "0px 21px 16px 7px rgba(8,2,2,0.97)",
-        }}
+        style={{ backgroundColor: "rgb(33, 33, 33)" }}
       >
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
           <Link

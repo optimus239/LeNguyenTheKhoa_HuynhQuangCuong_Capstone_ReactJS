@@ -66,7 +66,7 @@ export const { reducer: quanLyPhimReducer, actions: quanLyPhimActions } =
           state.isFetching = false;
           console.log(action.payload);
           Swal.fire("Thành Công!", "Bạn đã thêm phim thành công!", "success");
-          localStorage.setItem("USER_LOGIN", JSON.stringify(action.payload));
+          localStorage.setItem("filmparams", JSON.stringify(action.payload));
           redirect("/admin/films");
         })
         .addCase(themPhimUploadHinh.rejected, (state, action) => {
