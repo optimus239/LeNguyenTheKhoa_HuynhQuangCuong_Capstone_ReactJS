@@ -42,8 +42,8 @@ const AddFilm = () => {
 
   const onSubmit = (data) => {
     data.ngayKhoiChieu = moment(data.ngayKhoiChieu).format("DD-MM-YYYY");
-    data.dangChieu = !data.sapChieu;
-
+    data.dangChieu = true;
+    console.log(data);
     // Tạo đối tượng formdata
     let formData = new FormData();
     for (let key in data) {

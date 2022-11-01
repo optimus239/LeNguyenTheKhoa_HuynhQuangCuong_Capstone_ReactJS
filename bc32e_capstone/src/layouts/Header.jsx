@@ -20,13 +20,9 @@ const Header = () => {
   const item = [
     {
       label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.antgroup.com"
-        >
+        <Link rel="noopener noreferrer" to="/user">
           Tài Khoản
-        </a>
+        </Link>
       ),
       key: "0",
     },
