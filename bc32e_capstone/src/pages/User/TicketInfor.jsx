@@ -47,7 +47,7 @@ const TicketInfor = () => {
                         {moment(ticket.ngayDat).format("hh-mm A")}
                         <br />
                         <span>Rạp: </span>
-                        {seats.tenHeThongRap} <span>- Ghế: </span>
+                        {seats.tenHeThongRap} <span> - Ghế: </span>
                         {ticket.danhSachGhe.map((ghe, index) => (
                           <span className="text-blue-400 mr-2" key={index}>
                             {ghe.tenGhe}
