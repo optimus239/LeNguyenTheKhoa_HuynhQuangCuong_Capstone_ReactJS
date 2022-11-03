@@ -50,7 +50,6 @@ const EditFilm = () => {
 
   const onSubmit = (data) => {
     data.ngayKhoiChieu = moment(data.ngayKhoiChieu).format("DD-MM-YYYY");
-    data.dangChieu = true;
 
     // Tạo đối tượng formdata
     let formData = new FormData();
@@ -245,7 +244,31 @@ const EditFilm = () => {
             </div>
           </div>
         </div>
-        <div className="grid md:grid-cols-2 md:gap-6">
+        <div className="grid md:grid-cols-3 md:gap-6">
+          <div className="relative z-0 mb-6 w-full group">
+            <div>
+              <label
+                htmlFor="toggle"
+                className="text-sm font-medium text-gray-900 dark:text-gray-300 mr-12"
+              >
+                Đang Chiếu:
+              </label>
+              <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                <input
+                  type="checkbox"
+                  name="dangChieu"
+                  id="dangChieu"
+                  className="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-2 appearance-none cursor-pointer"
+                  {...register("dangChieu")}
+                />
+                <label
+                  htmlFor="dangChieu"
+                  className="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 cursor-pointer"
+                />
+              </div>
+            </div>
+          </div>
+
           <div className="relative z-0 mb-6 w-full group">
             <div>
               <label

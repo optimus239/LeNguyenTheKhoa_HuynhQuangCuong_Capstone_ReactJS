@@ -115,11 +115,12 @@ export const { reducer: quanLyPhimReducer, actions: quanLyPhimActions } =
         })
         .addCase(updateMovie.rejected, (state, action) => {
           state.error = action.payload;
+          console.log(action.payload);
           state.isFetching = false;
           Swal.fire({
             icon: "error",
             title: "Thất bại...",
-            text: action.payload.content,
+            text: action.payload,
             footer: '<a href="">Xin cảm ơn</a>',
           });
         });
