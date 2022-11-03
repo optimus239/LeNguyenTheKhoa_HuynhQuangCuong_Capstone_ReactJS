@@ -48,13 +48,9 @@ const UserLayout = () => {
   const { userLogin } = useQuanLyNguoiDung();
 
   const navigate = useNavigate();
-  // if (!userLogin) {
-  //   console.log("gì dọ");
-  //   navigate("/home");
-  // }
+
   useEffect(() => {
     if (!userLogin) {
-      console.log("gì dọ");
       navigate("/home");
     }
   }, [userLogin]);
@@ -180,8 +176,8 @@ const UserLayout = () => {
               margin: "16px 0",
             }}
           >
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
+            {/* <Breadcrumb.Item>User</Breadcrumb.Item>
+            <Breadcrumb.Item>Bill</Breadcrumb.Item> */}
           </Breadcrumb>
           <div
             className="site-layout-background"

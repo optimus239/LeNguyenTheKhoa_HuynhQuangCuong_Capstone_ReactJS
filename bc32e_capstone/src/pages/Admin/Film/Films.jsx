@@ -179,13 +179,13 @@ const Films = () => {
               className="text-xl text-gray-400 hover:text-red-400 mr-2"
               onClick={() => {
                 Swal.fire({
-                  title: "Are you sure?",
-                  text: "You won't be able to revert this!",
+                  title: "Bạn có muốn xóa phim?",
+                  text: "Bạn sẽ không thể khôi phục lại phim đã xóa!",
                   icon: "warning",
                   showCancelButton: true,
                   confirmButtonColor: "#3085d6",
                   cancelButtonColor: "#d33",
-                  confirmButtonText: "Yes, delete it!",
+                  confirmButtonText: "Xóa phim!",
                 }).then((result) => {
                   if (result.isConfirmed) {
                     dispatch(xoaPhim(record.maPhim));
