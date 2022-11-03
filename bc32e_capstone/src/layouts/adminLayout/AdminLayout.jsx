@@ -196,7 +196,7 @@ const AdminLayout = () => {
             textAlign: "center",
           }}
         >
-          Ant Design ©2018 Created by Ant UED
+          Dev by BC32E Nhóm 1: Huỳnh Quang Cường - Lê Nguyễn Thế Khoa
         </Footer>
       </Layout>
     </Layout>
