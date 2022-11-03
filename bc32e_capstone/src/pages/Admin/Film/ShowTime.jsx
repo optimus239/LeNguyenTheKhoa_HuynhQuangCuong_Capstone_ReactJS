@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 
 const ShowTime = () => {
   const params = useParams();
-  console.log("params: ", params);
+
   const [state, setState] = useState({
     heThongRapChieu: [],
     cumRapChieu: [],

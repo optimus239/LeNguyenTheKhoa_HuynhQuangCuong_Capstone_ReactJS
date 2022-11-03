@@ -18,7 +18,7 @@ import { removeVietnameseTones } from "../../../ultis/convertAlphabetToAlphanume
 
 const User = () => {
   const { userList } = useQuanLyNguoiDung();
-  console.log("userList: ", userList);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(danhSachNguoiDung());
