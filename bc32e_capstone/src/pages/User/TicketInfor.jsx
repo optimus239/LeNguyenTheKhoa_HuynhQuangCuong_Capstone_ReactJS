@@ -7,7 +7,6 @@ import { inforCustomer, useQuanLyNguoiDung } from "../../store/quanLyNguoiDung";
 
 const TicketInfor = () => {
   const { customer } = useQuanLyNguoiDung();
-  console.log("customer: ", customer);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,7 +25,6 @@ const TicketInfor = () => {
           <div className="flex flex-wrap -m-2">
             {customer?.thongTinDatVe.map((ticket, index) => {
               const seats = _.first(ticket.danhSachGhe);
-              console.log("seats: ", seats);
               return (
                 <div key={index} className="p-2 lg:w-1/2 md:w-1/2 w-full">
                   <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">

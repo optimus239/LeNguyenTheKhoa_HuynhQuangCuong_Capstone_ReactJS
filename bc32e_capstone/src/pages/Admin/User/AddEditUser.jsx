@@ -13,13 +13,11 @@ const AddEditUser = () => {
   const [form] = Form.useForm();
 
   const [maLoaiNguoiDung, setMaLoaiNguoiDung] = useState([]);
-  console.log("maLoaiNguoiDung: ", maLoaiNguoiDung);
 
   const dispatch = useDispatch();
 
   // Get user's id by useParams
   const params = useParams();
-  console.log("params: ", params.iduser);
 
   // declare defaultValues of Form
   const defaultValues = {
@@ -36,7 +34,7 @@ const AddEditUser = () => {
   if (!params.iduser) {
     userDetail = [];
   }
-  console.log("userDetail: ", userDetail);
+
   useEffect(() => {
     // declare the async data fetching function
     const fetchData = async () => {
@@ -70,21 +68,16 @@ const AddEditUser = () => {
 
   // Select
   const { Option } = Select;
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
-  };
+  const handleChange = (value) => {};
 
   // Submit
   const onFinish = (values) => {
-    console.log("Success:", values);
     if (!params.iduser) {
       return dispatch(themNguoiDung(values));
     }
     return dispatch(capNhatThongTinNguoiDung(values));
   };
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
+  const onFinishFailed = (errorInfo) => {};
 
   return (
     <div>

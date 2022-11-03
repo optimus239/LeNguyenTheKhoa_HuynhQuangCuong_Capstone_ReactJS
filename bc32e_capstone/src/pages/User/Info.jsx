@@ -30,7 +30,6 @@ const Info = () => {
     reset(userDetail);
   }, [userDetail]);
   const onSubmit = (data) => {
-    console.log(data);
     dispatch(capNhatThongTinNguoiDungTaiKhoan(data));
   };
   return (

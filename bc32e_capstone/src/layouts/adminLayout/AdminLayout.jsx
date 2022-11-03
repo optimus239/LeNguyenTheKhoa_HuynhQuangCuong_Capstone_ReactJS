@@ -46,10 +46,7 @@ const AdminLayout = () => {
   const { userLogin } = useQuanLyNguoiDung();
 
   const navigate = useNavigate();
-  // if (!userLogin) {
-  //   console.log("gì dọ");
-  //   navigate("/home");
-  // }
+
   useEffect(() => {
     if (!userLogin) {
       console.log("gì dọ");
@@ -88,7 +85,6 @@ const AdminLayout = () => {
     {
       label: <span onClick={dangXuat}>Đăng xuất</span>,
       key: "3",
-      // disabled: true,
     },
   ];
   const menu = <Menu items={item} />;
