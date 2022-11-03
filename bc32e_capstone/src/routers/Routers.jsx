@@ -18,6 +18,7 @@ import UserLayout from "../layouts/userlayout/UserLayout";
 import Info from "../pages/User/Info";
 import AddEditFilm from "../pages/Admin/Film/AddEditFilm";
 import EditTip from "../pages/Admin/Film/EditTip";
+import TicketInfor from "../pages/User/TicketInfor";
 
 const Routers = () => {
   const routing = useRoutes([
@@ -102,6 +103,10 @@ const Routers = () => {
         {
           path: "info",
           element: <Info />,
+        },
+        {
+          path: "ticketinfor",
+          element: <TicketInfor />,
         },
       ],
     },

@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./UserLayout.css";
 
-import { UserOutlined, VideoCameraOutlined } from "@ant-design/icons";
+import {
+  FileDoneOutlined,
+  UserOutlined,
+  VideoCameraOutlined,
+} from "@ant-design/icons";
 import { Breadcrumb, Layout, Dropdown, Menu, Space } from "antd";
 
 // import React, { useState } from "react";
@@ -31,12 +35,13 @@ const items = [
     </NavLink>,
     "1"
   ),
-  getItem(<NavLink to="/user/info">Tài khoản</NavLink>, "2", <UserOutlined />),
+  getItem(<NavLink to="/user/info">Tài khoản</NavLink>, "11", <UserOutlined />),
 
-  getItem("Thông tin vé", "3", <VideoCameraOutlined />, [
-    getItem(<NavLink to="/admin/films">Films</NavLink>, "31"),
-    getItem(<NavLink to="/admin/films/addfilm">Add Film</NavLink>, "32"),
-  ]),
+  getItem(
+    <NavLink to="/user/ticketinfor">Thông tin vé</NavLink>,
+    "2",
+    <FileDoneOutlined />
+  ),
 ];
 
 const UserLayout = () => {
@@ -69,6 +74,16 @@ const UserLayout = () => {
       ),
       key: "0",
     },
+    userLogin?.maLoaiNguoiDung === "QuanTri"
+      ? {
+          label: (
+            <Link rel="noopener noreferrer" to="/admin">
+              Quản trị
+            </Link>
+          ),
+          key: "1",
+        }
+      : undefined,
     {
       type: "divider",
     },
@@ -183,7 +198,7 @@ const UserLayout = () => {
             textAlign: "center",
           }}
         >
-          Ant Design ©2018 Created by Ant UED
+          Dev by BC32E Nhóm 1: Huỳnh Quang Cường - Lê Nguyễn Thế Khoa
         </Footer>
       </Layout>
     </Layout>
