@@ -51,6 +51,10 @@ const Routers = () => {
       element: <AdminLayout />,
       children: [
         {
+          path: "/admin",
+          element: <Films />,
+        },
+        {
           path: "films",
           element: <Films />,
         },
@@ -96,6 +100,10 @@ const Routers = () => {
       path: "/user",
       element: <UserLayout />,
       children: [
+        {
+          path: "/user",
+          element: <Info />,
+        },
         {
           path: "info",
           element: <Info />,
