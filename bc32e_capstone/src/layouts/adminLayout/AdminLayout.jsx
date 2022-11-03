@@ -72,6 +72,16 @@ const AdminLayout = () => {
       ),
       key: "0",
     },
+    userLogin?.maLoaiNguoiDung === "QuanTri"
+      ? {
+          label: (
+            <Link rel="noopener noreferrer" to="/admin">
+              Quản trị
+            </Link>
+          ),
+          key: "1",
+        }
+      : undefined,
     {
       type: "divider",
     },

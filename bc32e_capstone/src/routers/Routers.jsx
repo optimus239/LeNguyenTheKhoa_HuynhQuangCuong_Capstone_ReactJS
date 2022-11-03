@@ -17,6 +17,7 @@ import AddEditUser from "../pages/Admin/User/AddEditUser";
 import UserLayout from "../layouts/userlayout/UserLayout";
 import Info from "../pages/User/Info";
 import AddEditFilm from "../pages/Admin/Film/AddEditFilm";
+import EditTip from "../pages/Admin/Film/EditTip";
 
 const Routers = () => {
   const routing = useRoutes([
@@ -71,6 +72,10 @@ const Routers = () => {
         {
           path: "films/addeditfilm/:id",
           element: <AddEditFilm />,
+        },
+        {
+          path: "films/test/:id",
+          element: <EditTip />,
         },
         {
           path: "films/showtime/:id",

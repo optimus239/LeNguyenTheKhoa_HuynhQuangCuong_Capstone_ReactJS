@@ -21,12 +21,10 @@ import {
   updateMovie,
   useQuanLyPhim,
 } from "../../../store/quanLyPhim";
-import { capNhatThongTinNguoiDung } from "../../../store/quanLyNguoiDung";
 
 const AddEditFilm = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   let { movieDetail } = useQuanLyPhim();
   console.log("movieDetail: ", movieDetail);
 
@@ -65,6 +63,7 @@ const AddEditFilm = () => {
         ? {
             ...movieDetail,
             ngayKhoiChieu: moment(movieDetail?.ngayKhoiChieu),
+            danhGia: movieDetail?.danhGia / 2,
             hinhAnh: null,
           }
         : defaultValues
@@ -98,7 +97,7 @@ const AddEditFilm = () => {
   // Form submit
   const onFinish = (data) => {
     data.ngayKhoiChieu = moment(data.ngayKhoiChieu).format("DD-MM-YYYY");
-    // data.danhGia = data.danhGia * 2;
+    data.danhGia = data.danhGia * 2;
     console.log("Success:", data);
 
     // Tạo đối tượng formdata
@@ -203,7 +202,7 @@ const AddEditFilm = () => {
         </Select>
       </Form.Item>
 
-      <Form.Item label="Đánh Giá" name="danhGia">
+      <Form.Item label="Đánh Giá" name="danhgia">
         <Rate onChange={handleRate} allowHalf />
       </Form.Item>
 
