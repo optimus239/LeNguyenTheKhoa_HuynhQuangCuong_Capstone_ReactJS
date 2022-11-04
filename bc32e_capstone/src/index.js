@@ -10,6 +10,7 @@ import "antd/dist/antd.css";
 //react-slick
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "./assets/index";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

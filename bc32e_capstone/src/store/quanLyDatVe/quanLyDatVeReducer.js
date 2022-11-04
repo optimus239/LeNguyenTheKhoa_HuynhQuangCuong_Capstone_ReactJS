@@ -28,6 +28,9 @@ export const { reducer: quanLyDatVeReducer, actions: quanLyDatVeActions } =
       changeKey: (state, action) => {
         state.tabActive = action.payload.number;
       },
+      resetTab: (state, action) => {
+        state.tabActive = action.payload.number;
+      },
     },
     extraReducers: (builder) => {
       builder
@@ -100,4 +103,4 @@ export const postCheckOut = createAsyncThunk(
   }
 );
 
-export const { getCheckedList, changeKey } = quanLyDatVeActions;
+export const { getCheckedList, changeKey, resetTab } = quanLyDatVeActions;

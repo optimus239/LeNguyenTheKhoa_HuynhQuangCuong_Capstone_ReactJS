@@ -23,21 +23,96 @@
 
 .movie-list .ant-card {
   margin: 10px;
-}
-
-.movie-list .btn-playing {
-  border: 1px solid #fff;
-}
-
-.movie-list .btn-coming {
-  border: 1px solid #fff;
-}
-
-.movie-list .btn-playing p,
-.movie-list .btn-coming p {
-  color: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  border: none;
 }
 
 .width-item {
   width: 100% !important;
+}
+
+.movie-list .btn-playing,
+.movie-list .btn-coming {
+  position: relative;
+  border-radius: 7px;
+  padding: 7px;
+  text-decoration: none;
+  padding: 0.25em 1em;
+  border-radius: 0.25em;
+  text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em rgb(135, 8, 8);
+  box-shadow: inset 0 0 0.5em 0 red, 0 0 0.5em 0 rgb(135, 8, 8);
+}
+
+.movie-list .btn-playing button::before,
+.movie-list .btn-coming button::before {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  background: rgb(135, 8, 8);
+  top: 60%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: perspective(1em) rotateX(40deg) scale(1, 0.35);
+  filter: blur(1em);
+  opacity: 0;
+}
+
+.movie-list .btn-playing button:hover,
+.movie-list .btn-coming button:hover,
+.movie-list .btn-playing button:focus,
+.movie-list .btn-coming button:focus {
+  color: rgb(232, 218, 218);
+}
+
+.movie-list .btn-playing button:hover::before,
+.movie-list .btn-coming button:hover::before,
+.movie-list .btn-playing button:focus::before,
+.movie-list .btn-coming button:focus::before {
+  opacity: 1;
+}
+
+.movie-list .ant-card:hover {
+  transform: scale(1.05);
+  transition: all 0.5s linear;
+}
+
+.ant-card-body .btn-detail {
+  padding: 5px 20px;
+  background: linear-gradient(
+    90deg,
+    rgba(131, 58, 180, 1) 0%,
+    rgba(117, 2, 2, 0.7432015042345064) 54%,
+    rgba(252, 176, 69, 1) 97%
+  );
+}
+
+.movie-list::before {
+  content: "";
+  position: absolute;
+  height: 91%;
+  width: 7%;
+  z-index: 5;
+  background-color: rgb(33, 33, 33);
+  box-shadow: 25px 2px 20px 4px rgb(33 33 33 / 99%);
+  top: 7%;
+}
+
+.movie-list::after {
+  content: "";
+  position: absolute;
+  height: 92%;
+  width: 8%;
+  z-index: 5;
+  background-color: rgb(33, 33, 33);
+  box-shadow: -25px -2px 12px -4px rgb(33 33 33 / 99%);
+  right: 0;
+  top: 8%;
+}
+
+.movie-list .slick-prev,
+.movie-list .slick-next {
+  position: absolute;
+  z-index: 6;
 }

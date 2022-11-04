@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { logOut, useQuanLyNguoiDung } from "../store/quanLyNguoiDung";
 import { Dropdown, Menu, Space } from "antd";
@@ -55,16 +55,16 @@ const Header = () => {
   return (
     <>
       <Navbar
-        className="flex flex-wrap items-center justify-between px-2 py-3 z-10 w-full"
+        className="flex flex-wrap items-center justify-between px-2 py-3 z-10 w-full container"
         style={{ backgroundColor: "rgb(33, 33, 33)" }}
       >
-        <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
-          <Link
+        <div className="container px-4 flex flex-wrap items-center justify-between">
+          <NavLink
             className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start"
             to="/home"
           >
             <a
-              className="uppercase text-red-700 font-bold text-lg items-center"
+              className="uppercase text-red-700 font-bold text-2xl items-center"
               href="#pablo"
             >
               Cybersoft
@@ -76,7 +76,7 @@ const Header = () => {
             >
               <i className="fas fa-bars"></i>
             </button>
-          </Link>
+          </NavLink>
           <div
             className={
               "lg:flex flex-grow items-center" +
@@ -91,9 +91,9 @@ const Header = () => {
                   href="#pablo"
                 >
                   <i className="text-lg text-white opacity-75"></i>
-                  <Link className="ml-2" to="/home">
+                  <NavLink className="ml-2 text-white" to="/home">
                     Trang chủ
-                  </Link>
+                  </NavLink>
                 </a>
               </li>
               <li className="nav-item">

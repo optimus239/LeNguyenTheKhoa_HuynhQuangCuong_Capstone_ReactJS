@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { Carousel } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { getCarouselList } from "../store/quanLyPhim/quanLyPhimReducer";
+import { getCarouselList } from "../../store/quanLyPhim";
+import "./CarouselMovie.css";
 
 const contentStyle = {
   height: "600px",
@@ -33,7 +34,11 @@ const CarouselMovie = () => {
   };
 
   return (
-    <Carousel effect="fade" autoplay className="opacity-95 overflow-hidden">
+    <Carousel
+      effect="fade"
+      autoplay
+      className="opacity-95 overflow-hidden carousel-movie"
+    >
       {renderCarousel()}
     </Carousel>
   );

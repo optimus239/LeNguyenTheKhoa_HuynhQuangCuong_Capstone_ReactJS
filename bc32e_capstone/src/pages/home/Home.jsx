@@ -1,6 +1,6 @@
 import React from "react";
 import MovieList from "../../layouts/movieList/MovieList";
-import CarouselMovie from "../../layouts/CarouselMovie";
+import CarouselMovie from "../../layouts/carousel/CarouselMovie";
 import Cinemas from "../../layouts/cinemas/Cinemas";
 
 const Home = () => {

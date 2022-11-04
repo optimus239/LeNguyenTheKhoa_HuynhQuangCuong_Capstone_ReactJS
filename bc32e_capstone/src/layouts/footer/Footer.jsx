@@ -6,14 +6,18 @@ const Footer = () => {
   return (
     <Background className="container flex text-center items-center">
       <div className="w-1/3 text-stone-50 text-left ml-12">
-        <div>CYBERSOFT MOVIE</div>
-        <div>Giới thiệu</div>
-        <div>Tiện ích online</div>
-        <div>Tuyển dụng</div>
-        <div>Liên hệ quảng cáo</div>
+        <div className="text-stone-50 text-left ml-12 font-bold">
+          CYBERSOFT MOVIE
+        </div>
+        <div className="text-stone-50 text-left ml-12">Giới thiệu</div>
+        <div className="text-stone-50 text-left ml-12">Tiện ích online</div>
+        <div className="text-stone-50 text-left ml-12">Tuyển dụng</div>
+        <div className="text-stone-50 text-left ml-12">Liên hệ quảng cáo</div>
       </div>
-      <div className="w-1/3">
-        <div className="text-stone-50 text-left ml-12">ĐIỀU KHOẢN SỬ DỤNG</div>
+      <div className="w-1/3 text-stone-50 text-left ml-12">
+        <div className="text-stone-50 text-left ml-12 font-bold">
+          ĐIỀU KHOẢN SỬ DỤNG
+        </div>
         <div className="text-stone-50 text-left ml-12">
           Điều khoản giao dịch
         </div>

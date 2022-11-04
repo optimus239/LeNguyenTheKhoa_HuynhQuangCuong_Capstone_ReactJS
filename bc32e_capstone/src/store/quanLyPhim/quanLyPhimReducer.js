@@ -8,7 +8,6 @@ const initialState = {
   isFetching: false,
   error: undefined,
   carouselList: [],
-
   movieDetail: undefined,
 };
 
