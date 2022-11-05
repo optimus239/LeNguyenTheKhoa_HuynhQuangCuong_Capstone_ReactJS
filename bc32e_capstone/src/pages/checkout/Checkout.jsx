@@ -232,7 +232,7 @@ export default function () {
   const dispatch = useDispatch();
 
   return (
-    <div className="p-5 overflow-hidden">
+    <div className="p-5 overflow-hidden max-w-full">
       <Tabs
         defaultActiveKey="1"
         activeKey={tabActive}

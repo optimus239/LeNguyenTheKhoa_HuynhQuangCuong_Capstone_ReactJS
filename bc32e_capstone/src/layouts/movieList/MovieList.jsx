@@ -30,7 +30,7 @@ function SamplePrevArrow(props) {
   );
 }
 
-const settings = {
+var settings = {
   className: "center",
   centerMode: true,
   infinite: true,
@@ -42,6 +42,48 @@ const settings = {
   variableWidth: true,
   nextArrow: <SampleNextArrow />,
   prevArrow: <SamplePrevArrow />,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 2,
+        slidesPerRow: 1,
+      },
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 1,
+        slidesPerRow: 1,
+        rows: 1,
+      },
+    },
+    {
+      breakpoint: 667,
+      settings: {
+        slidesToShow: 1,
+        slidesPerRow: 1,
+        rows: 1,
+      },
+    },
+    {
+      breakpoint: 576,
+      settings: {
+        slidesToShow: 1,
+        rows: 1,
+        // slidesPerRow: 1,
+      },
+    },
+    {
+      breakpoint: 500,
+      settings: {
+        slidesToShow: 1,
+        rows: 1,
+        centerPadding: "0",
+        // slidesPerRow: 1,
+      },
+    },
+  ],
 };
 
 const MovieList = () => {
@@ -84,7 +126,7 @@ const MovieList = () => {
       ));
 
   return (
-    <div className="container mx-auto movie-list relative">
+    <div className="container mx-auto movie-list relative max-w-full overflow-hidden">
       <div className="btn-movie flex justify-center pt-5 text-center mb-[10px] ">
         <div
           className="btn-playing mr-24 w-1/6 text-2xl cursor-pointer"
@@ -94,7 +136,9 @@ const MovieList = () => {
             });
           }}
         >
-          <button className="mb-0 text-slate-400 w-full">Đang chiếu</button>
+          <button className="text-playing mb-0 text-slate-400 w-full">
+            Đang chiếu
+          </button>
         </div>
         <div
           className="btn-coming ml-24 w-1/6 text-2xl text-center cursor-pointer"
@@ -104,7 +148,9 @@ const MovieList = () => {
             });
           }}
         >
-          <button className="mb-0 text-slate-400 w-full">Sắp chiếu</button>
+          <button className="text-coming mb-0 text-slate-400 w-full">
+            Sắp chiếu
+          </button>
         </div>
       </div>
       <Slider {...settings}>{renderMovie()}</Slider>

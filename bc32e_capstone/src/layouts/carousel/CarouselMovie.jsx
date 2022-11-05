@@ -9,7 +9,6 @@ const contentStyle = {
   color: "#fff",
   lineHeight: "160px",
   textAlign: "center",
-  background: "#364d79",
   backgroundPosition: "center",
   backgroundSize: "cover",
   backgroundRepeat: "no-repeat",
@@ -27,6 +26,7 @@ const CarouselMovie = () => {
     return carouselList.map((item, index) => (
       <div key={index}>
         <div
+          className="bg-carousel-top"
           style={{ ...contentStyle, backgroundImage: `url(${item.hinhAnh})` }}
         ></div>
       </div>

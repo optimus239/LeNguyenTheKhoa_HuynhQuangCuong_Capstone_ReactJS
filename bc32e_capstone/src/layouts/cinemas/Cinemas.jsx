@@ -19,7 +19,7 @@ const Cinemas = () => {
   };
 
   return (
-    <div className="flex container mx-auto cinema-list pt-20 pb-20 overflow-hidden px-6">
+    <div className="flex container mx-auto cinema-list pt-20 pb-20 overflow-hidden px-6 max-w-full">
       <div className="tab-cinema w-full">
         <Tabs
           defaultActiveKey="1"
@@ -60,15 +60,15 @@ const Cinemas = () => {
                       key: id,
                       children: item.danhSachPhim.map((val, id) => (
                         <div key={id}>
-                          <div className="my-3 flex">
+                          <div className="my-3 flex cinema-detail">
                             <div>
                               <img
                                 src={val.hinhAnh}
                                 alt=""
-                                className="w-52 h-52 rounded-md mr-5"
+                                className="img-film-cinema w-52 h-52 rounded-md mr-5"
                               />
                             </div>
-                            <div>
+                            <div className="ml-3">
                               <p className="text-2xl text-zinc-300 font-bold">
                                 {val.tenPhim}
                               </p>

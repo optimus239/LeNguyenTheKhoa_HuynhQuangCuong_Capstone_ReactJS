@@ -37,7 +37,7 @@ const MovieDetail = () => {
   };
 
   return (
-    <div className="container mx-auto h-full relative justify-center">
+    <div className="container mx-auto h-full relative justify-center max-w-full">
       <div>
         <img
           className="absolute inset-0 h-full w-full object-cover opacity-40 z-[-1]"

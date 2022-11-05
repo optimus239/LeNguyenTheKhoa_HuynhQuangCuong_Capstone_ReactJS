@@ -5,7 +5,7 @@ import Cinemas from "../../layouts/cinemas/Cinemas";
 
 const Home = () => {
   return (
-    <div className="container">
+    <div className="container max-w-full">
       <CarouselMovie />
       <MovieList />
       <Cinemas />

@@ -4,8 +4,8 @@ import "./Footer.css";
 
 const Footer = () => {
   return (
-    <Background className="container flex text-center items-center">
-      <div className="w-1/3 text-stone-50 text-left ml-12">
+    <Background className="container flex text-center items-center max-w-full">
+      <div className="w-3/12 text-stone-50 text-left ml-12">
         <div className="text-stone-50 text-left ml-12 font-bold">
           CYBERSOFT MOVIE
         </div>
@@ -14,7 +14,7 @@ const Footer = () => {
         <div className="text-stone-50 text-left ml-12">Tuyển dụng</div>
         <div className="text-stone-50 text-left ml-12">Liên hệ quảng cáo</div>
       </div>
-      <div className="w-1/3 text-stone-50 text-left ml-12">
+      <div className="w-3/12 text-stone-50 text-left ml-12">
         <div className="text-stone-50 text-left ml-12 font-bold">
           ĐIỀU KHOẢN SỬ DỤNG
         </div>
@@ -27,8 +27,8 @@ const Footer = () => {
         <div className="text-stone-50 text-left ml-12">Chính sách bảo mật</div>
         <div className="text-stone-50 text-left ml-12">Câu hỏi thường gặp</div>
       </div>
-      <div className="w-1/3">
-        <div className="flex">
+      <div className="w-6/12">
+        <div className="flex justify-center">
           <p className="text-rose-700 font-extrabold text-3xl mr-3">
             CYBERSOFT
           </p>
@@ -38,7 +38,7 @@ const Footer = () => {
             </p>
           </div>
         </div>
-        <p className="text-left text-zinc-500">
+        <p className="text-left text-zinc-500 text-center">
           © CYBERSOFT ALL RIGHTS RESERVED
         </p>
       </div>

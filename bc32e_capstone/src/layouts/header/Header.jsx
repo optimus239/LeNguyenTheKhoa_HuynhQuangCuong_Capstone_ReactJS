@@ -3,8 +3,9 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { logOut, useQuanLyNguoiDung } from "../store/quanLyNguoiDung";
+import { logOut, useQuanLyNguoiDung } from "../../store/quanLyNguoiDung";
 import { Dropdown, Menu, Space } from "antd";
+import "./Header.css";
 
 const Header = () => {
   const { userLogin } = useQuanLyNguoiDung();
@@ -55,12 +56,12 @@ const Header = () => {
   return (
     <>
       <Navbar
-        className="flex flex-wrap items-center justify-between px-2 py-3 z-10 w-full container"
+        className="flex flex-wrap items-center justify-between px-2 py-3 z-10 w-full container max-w-full header"
         style={{ backgroundColor: "rgb(33, 33, 33)" }}
       >
-        <div className="container px-4 flex flex-wrap items-center justify-between">
+        <div className="container px-4 flex flex-wrap items-center justify-between max-w-full">
           <NavLink
-            className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start"
+            className="w-full navbar-res relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start"
             to="/home"
           >
             <a
@@ -69,13 +70,6 @@ const Header = () => {
             >
               Cybersoft
             </a>
-            <button
-              className="text-white cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
-              type="button"
-              onClick={() => setNavbarOpen(!navbarOpen)}
-            >
-              <i className="fas fa-bars"></i>
-            </button>
           </NavLink>
           <div
             className={
@@ -118,7 +112,7 @@ const Header = () => {
           </div>
           <div className="flex">
             {userLogin ? (
-              <div className="px-3 flex items-center text-xs uppercase font-bold  text-white ">
+              <div className="navbar-user px-3 flex items-center text-xs uppercase font-bold  text-white ">
                 <span className="mr-2">Xin Chào</span>
                 <Dropdown overlay={menu} placement="bottomLeft" arrow>
                   <a onClick={(e) => e.preventDefault()}>
