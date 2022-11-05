@@ -26,7 +26,6 @@ const AddEditFilm = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   let { movieDetail } = useQuanLyPhim();
-  console.log("movieDetail: ", movieDetail);
 
   const defaultValues = {
     tenPhim: "",
@@ -43,7 +42,6 @@ const AddEditFilm = () => {
 
   // Get movie's id by useParams
   const params = useParams();
-  console.log("params: ", params.id);
 
   if (!params.id) {
     movieDetail = [];
@@ -72,20 +70,17 @@ const AddEditFilm = () => {
 
   // Select
   const { Option } = Select;
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
-  };
+  const handleChange = (value) => {};
 
   // Rate
   const handleRate = (value) => {
-    console.log(`selected ${value} *`);
+    // console.log(`selected ${value} *`);
   };
 
   // Upload
   const normFile = (e) => {
-    console.log("Upload event:", e);
     if (Array.isArray(e)) {
-      return e;
+      return e.fileList;
     }
     return e?.fileList;
   };
@@ -108,13 +103,15 @@ const AddEditFilm = () => {
       } else {
         if (data.hinhAnh !== null) {
           formData.append(
-            "FILE",
+            "File",
             data.hinhAnh[0].originFileObj,
-            data.hinhAnh[0].name
+            data.hinhAnh[0].originFileObj.name
           );
         }
       }
     }
+    console.log("formData:", formData.get("File"));
+    console.log("data:", data.hinhAnh);
     if (!params.id) {
       dispatch(themPhimUploadHinh(formData));
     } else {
@@ -214,7 +211,11 @@ const AddEditFilm = () => {
         getValueFromEvent={normFile}
       >
         <Upload
-          beforeUpload={() => false}
+          beforeUpload={(file, fileList) => {
+            console.log(file);
+            console.log(fileList);
+            return false;
+          }}
           maxCount={1}
           name="logo"
           action=""

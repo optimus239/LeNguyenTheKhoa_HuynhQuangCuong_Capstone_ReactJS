@@ -42,7 +42,7 @@ const AddFilm = () => {
 
   const onSubmit = (data) => {
     data.ngayKhoiChieu = moment(data.ngayKhoiChieu).format("DD-MM-YYYY");
-
+    console.log("data", data);
     // Tạo đối tượng formdata
     let formData = new FormData();
     for (let key in data) {
