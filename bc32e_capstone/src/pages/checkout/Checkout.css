@@ -8,7 +8,7 @@
   background: linear-gradient(114deg, #f2b5d4 -10%, #7bdff2 164%);
   transform: translate3d(3px, 15px, 0) scale(0.94);
   border-radius: 10px;
-  margin: 0 auto 20px;
+  margin: 0 21% 20px auto;
 }
 
 /* normal seat */
@@ -56,7 +56,6 @@
   box-shadow: 1px -3px 37px -7px rgba(69, 55, 55, 0.74);
 }
 
-/* CSS */
 .btn-back-home {
   padding: 0.6em 2em;
   border: none;
@@ -122,4 +121,110 @@
   left: 0;
   top: 0;
   border-radius: 10px;
+}
+
+.ant-tabs-content {
+  justify-content: center;
+}
+
+@media only screen and (max-width: 1024px) {
+  .checkout-seat {
+    padding-bottom: 10%;
+  }
+  .total-price {
+    margin-right: 3%;
+    text-align: start;
+    margin-left: 40%;
+  }
+  .price-vnd {
+    margin-right: 29%;
+  }
+  .button-back-home {
+    left: 0;
+    right: 0;
+    top: 145px;
+    width: 200px;
+    margin: 0 auto;
+  }
+  .checkout-thanks {
+    margin-bottom: 40px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .total-price {
+    margin-right: 3%;
+    text-align: start;
+    margin-left: 20%;
+  }
+  .price-vnd {
+    margin-right: 44%;
+  }
+}
+
+@media only screen and (max-width: 670px) {
+  .total-price {
+    margin-right: 3%;
+    text-align: start;
+    margin-left: 13%;
+  }
+  .price-vnd {
+    margin-right: 51%;
+  }
+  .button-back-home {
+    top: 150px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .button-back-home {
+    top: 165px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .total-price {
+    margin-right: 3%;
+    text-align: start;
+    margin-left: 36%;
+  }
+  .price-vnd {
+    margin-right: 41%;
+  }
+  .checkout-total-price {
+    width: 100% !important;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .total {
+    display: block !important;
+  }
+  .checkout-email,
+  .checkout-phone {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .infor-seat,
+  .infor-email,
+  .infor-phone {
+    width: 100%;
+    text-align: center;
+  }
+  .total-price-top {
+    margin-left: -71%;
+  }
+  .checkout-seat {
+    padding-bottom: 20%;
+  }
+  .display-cinema {
+    width: 60%;
+    height: 3%;
+    margin-right: 27%;
+  }
+}
+
+@media only screen and (max-width: 530px) {
+  .button-back-home {
+    top: 190px;
+  }
 }

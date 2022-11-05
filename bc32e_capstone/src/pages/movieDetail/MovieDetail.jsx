@@ -46,15 +46,15 @@ const MovieDetail = () => {
       </div>
       <div className="p-[5%]">
         <div className="movie-detail h-full p-3">
-          <div className="flex mb-12 w-full">
-            <div className="w-4/12 mr-9">
+          <div className="movie-detail-top flex mb-12 w-full">
+            <div className="w-4/12 mr-9 movie-detail-img">
               <img
                 src={movieDetail?.hinhAnh}
                 alt={movieDetail?.biDanh}
                 className="w-full h-full rounded-lg"
               />
             </div>
-            <div className="w-8/12">
+            <div className="movie-description w-8/12">
               <h1 className="font-bold text-3xl text-slate-200 mb-5 movie-name">
                 {movieDetail?.tenPhim}
               </h1>
@@ -132,12 +132,12 @@ const MovieDetail = () => {
                       key: i,
                       children: val.cumRapChieu.map((item, i) => (
                         <div key={i}>
-                          <div className="flex w-full">
-                            <div className="w-2/12 mr-5">
+                          <div className="flex w-full showtime-detail">
+                            <div className="w-2/12 mr-5 showtime-detail-img ">
                               <img
                                 src={item.hinhAnh}
                                 alt=""
-                                className="mb-5 mr-5 rounded-md"
+                                className="mb-5 mr-5 rounded-md img-cinema-showtime"
                               />
                             </div>
                             <div className="w-10/12">
@@ -147,7 +147,7 @@ const MovieDetail = () => {
                               <div className="text-neutral-200 text-lg mb-3">
                                 {item.diaChi}
                               </div>
-                              <div className="grid grid-cols-7">
+                              <div className="grid grid-cols-7 movie-detail-time">
                                 {item.lichChieuPhim.map((lichChieu, i) => (
                                   <button
                                     className="mr-5 border rounded mb-3 btn-date-movie text-zinc-700"

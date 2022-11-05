@@ -38,7 +38,7 @@ const Checkout = () => {
     return (
       <div className="container">
         <div>
-          <div className=" mt-4 flex text-center ml-[550%]">
+          <div className=" mt-4 flex text-center ml-[25%]">
             <Skeleton.Button
               className="mr-1"
               shape={buttonShape}
@@ -112,43 +112,11 @@ const Checkout = () => {
             <h3 className="mb-0 text-red-50 text-lg">Màn hình</h3>
           </div>
           <div>{renderSeat()}</div>
-          <div className="mt-5 flex justify-center">
-            <table className="divide-y divide-gray-200 w-2/3">
-              <thead className="bg-gray-50 p-5 text-left">
-                <tr>
-                  <th>Ghế chưa đặt</th>
-                  <th>Ghế đang đặt</th>
-                  <th>Ghế đã được đặt</th>
-                  <th>Ghế VIP</th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                <tr>
-                  <td>
-                    <button className="seat">00</button>
-                  </td>
-                  <td>
-                    <button className="seat availableSeat">
-                      <CloseOutlined />
-                    </button>
-                  </td>
-                  <td>
-                    <button className="seat availableSeatBy">
-                      <UserOutlined />
-                    </button>
-                  </td>
-                  <td>
-                    <button className="seat vipSeat">00</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
         </div>
         <div className="col-span-3">
           <h3 className="text-center text-2xl text-green-500">
             <NumericFormat
-              className="text-center"
+              className="text-center total-price-top"
               allowLeadingZeros
               thousandSeparator=","
               value={checkedList.reduce((total, seat, i) => {
@@ -163,7 +131,7 @@ const Checkout = () => {
           <hr />
           <div className="my-5 flex flex-wrap">
             <div className="w-full flex flex-wrap">
-              <span className="text-lg mr-3">Ghế: </span>
+              <span className="text-lg mr-3  infor-seat">Ghế: </span>
               {_.sortBy(checkedList, ["maGhe"]).map((seat, i) => {
                 return (
                   <span key={i} className="text-green-500 text-xl mr-2">
@@ -172,31 +140,31 @@ const Checkout = () => {
                 );
               })}
             </div>
-            <div className="text-right flex">
-              <span className="text-lg">Total:</span>
+            <div className="text-right checkout-total-price flex ">
+              <span className="text-lg total">Total: </span>
               <span className="text-green-400 text-lg">
                 <NumericFormat
-                  className="text-end mr-5"
+                  className="text-end total-price mr-6"
                   allowLeadingZeros
                   thousandSeparator=","
                   value={checkedList.reduce((total, seat, i) => {
                     return (total += seat.giaVe);
                   }, 0)}
                 />
-                <span>VND</span>
+                <span className="mr-6 price-vnd">VND</span>
               </span>
             </div>
           </div>
           <hr />
-          <div className="my-5">
-            <i>Email:</i>
+          <div className="my-5 checout-email">
+            <i className="infor-email">Email:</i>
             <span className="text-green-400 text-xl ml-5">
               {customer?.email}
             </span>
           </div>
           <hr />
-          <div className="my-5">
-            <i>Phone:</i>
+          <div className="my-5 checkout-phone">
+            <i className="infor-phone">Phone:</i>
             <span className="text-green-400 text-xl ml-5">
               {customer?.soDT}
             </span>
@@ -217,6 +185,22 @@ const Checkout = () => {
               Đặt vé
             </button>
           </div>
+          <div className="mt-5 flex justify-center">
+            <div className="bg-white divide-y divide-gray-200">
+              <div className="text-black font-semibold">Ghế chưa đặt</div>
+              <button className="seat">00</button>
+              <div className="text-black font-semibold">Ghế đang đặt</div>
+              <button className="seat availableSeat">
+                <CloseOutlined />
+              </button>
+              <div className="text-black font-semibold">Ghế đã được đặt</div>
+              <button className="seat availableSeatBy">
+                <UserOutlined />
+              </button>
+              <div className="text-black font-semibold">Ghế VIP</div>
+              <button className="seat vipSeat">00</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -232,7 +216,7 @@ export default function () {
   const dispatch = useDispatch();
 
   return (
-    <div className="p-5 overflow-hidden max-w-full">
+    <div className="p-5 overflow-hidden max-w-full checkout-seat">
       <Tabs
         defaultActiveKey="1"
         activeKey={tabActive}
@@ -296,7 +280,7 @@ const KetQuaDatVe = () => {
               <b>Rạp:</b> {_.first(ticket.danhSachGhe).tenCumRap}
             </p>
             <p className="ml-[15px]">
-              <b>Ghế:</b>{" "}
+              <b>Ghế:</b>
             </p>
             <p>
               {_.sortBy(ticket.danhSachGhe, ["tenGhe"]).map((seat, i) => (
@@ -321,7 +305,7 @@ const KetQuaDatVe = () => {
             <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
               Cảm ơn quý khách đã lựa chọn dịch vụ của Cybersoft Movie.
             </p>
-            <p className="lg:w-2/3 mx-auto leading-relaxed text-base mb-0">
+            <p className="lg:w-2/3 mx-auto leading-relaxed text-base mb-0 checkout-thanks">
               Quý khách hàng vui lòng kiểm tra lại thông tin các vé đã đặt bên
               dưới.
             </p>
@@ -329,7 +313,7 @@ const KetQuaDatVe = () => {
           <div className="flex flex-wrap -m-2">{renderTicketItem()}</div>
         </div>
       </section>
-      <Link to="/" className="absolute top-0 right-0">
+      <Link to="/" className="absolute button-back-home top-0 right-0">
         <button
           className="border rounded-md btn-back-home font-semibold text-base"
           role="button"
