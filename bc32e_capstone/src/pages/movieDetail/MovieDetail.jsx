@@ -35,6 +35,9 @@ const MovieDetail = () => {
     setToggleTabs(index);
     console.log("setToggleTabs: ", setToggleTabs);
   };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="container mx-auto h-full relative justify-center max-w-full">

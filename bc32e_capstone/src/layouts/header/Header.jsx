@@ -64,12 +64,9 @@ const Header = () => {
             className="w-full navbar-res relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start"
             to="/home"
           >
-            <a
-              className="uppercase text-red-700 font-bold text-2xl items-center"
-              href="#pablo"
-            >
+            <span className="uppercase text-red-700 font-bold text-2xl items-center logo-cybersoft">
               Cybersoft
-            </a>
+            </span>
           </NavLink>
           <div
             className={
@@ -80,33 +77,31 @@ const Header = () => {
           >
             <ul className="flex flex-col lg:flex-row list-none justify-between mb-0">
               <li className="nav-item">
-                <a
-                  className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-                  href="#pablo"
-                >
+                <span className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
                   <i className="text-lg text-white opacity-75"></i>
                   <NavLink className="ml-2 text-white" to="/home">
                     Trang chủ
                   </NavLink>
-                </a>
+                </span>
               </li>
               <li className="nav-item">
-                <a
+                <span className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
+                  <i className="text-lg text-white opacity-75"></i>
+                  <Link className="ml-2" to={"/news"}>
+                    Tin tức
+                  </Link>
+                </span>
+              </li>
+              <li className="nav-item">
+                <span
                   className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                   href="#pablo"
                 >
                   <i className="text-lg text-white opacity-75"></i>
-                  <span className="ml-2">Phim</span>
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-                  href="#pablo"
-                >
-                  <i className="text-lg text-white opacity-75"></i>
-                  <span className="ml-2">Rạp</span>
-                </a>
+                  <Link className="ml-2" to={"/contact"}>
+                    Liên hệ
+                  </Link>
+                </span>
               </li>
             </ul>
           </div>

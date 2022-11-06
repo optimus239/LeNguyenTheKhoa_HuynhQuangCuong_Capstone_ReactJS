@@ -19,6 +19,8 @@ import Info from "../pages/User/Info";
 import AddEditFilm from "../pages/Admin/Film/AddEditFilm";
 import EditTip from "../pages/Admin/Film/EditTip";
 import TicketInfor from "../pages/User/TicketInfor";
+import MovieList from "../layouts/movieList/MovieList";
+import Cinemas from "../layouts/cinemas/Cinemas";
 
 const Routers = () => {
   const routing = useRoutes([

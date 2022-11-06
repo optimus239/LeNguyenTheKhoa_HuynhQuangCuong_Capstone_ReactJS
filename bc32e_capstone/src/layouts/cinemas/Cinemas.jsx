@@ -5,6 +5,7 @@ import { getCinemaList } from "../../store/quanLyRap/quanLyRapReducer";
 import "./Cinemas.css";
 import "./Cinemas.css";
 import moment from "moment";
+import "../../../node_modules/moment/locale/vi.js";
 
 const Cinemas = () => {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const Cinemas = () => {
           items={cinemaList.map((listCinema, id) => {
             return {
               label: (
-                <a className="logo-cinema">
+                <a className="logo-cinema" key={id}>
                   <img
                     src={listCinema.logo}
                     alt=""

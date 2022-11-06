@@ -34,6 +34,7 @@ const Checkout = () => {
 
   const [buttonShape, setButtonShape] = useState("circle");
   const [size, setSize] = useState("small");
+
   if (isFetching) {
     return (
       <div className="container">
