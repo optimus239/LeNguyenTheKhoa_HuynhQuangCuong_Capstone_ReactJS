@@ -2,13 +2,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60%;
+  width: 100%;
   height: 5%;
   filter: drop-shadow(2px 4px 6px rgb(179, 164, 219));
   background: linear-gradient(114deg, #f2b5d4 -10%, #7bdff2 164%);
   transform: translate3d(3px, 15px, 0) scale(0.94);
   border-radius: 10px;
-  margin: 0 21% 20px auto;
+  margin: 0 25% 20px auto;
 }
 
 /* normal seat */
@@ -127,14 +127,23 @@
   justify-content: center;
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1030px) {
+  .seat {
+    margin: 13px;
+  }
+}
+
+@media only screen and (max-width: 1023.98px) {
+  .seat {
+    margin: 10px;
+  }
   .checkout-seat {
     padding-bottom: 10%;
   }
   .total-price {
     margin-right: 3%;
     text-align: start;
-    margin-left: 40%;
+    /* margin-left: 40%; */
   }
   .price-vnd {
     margin-right: 29%;
@@ -151,7 +160,22 @@
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 790px) {
+  .seat {
+    margin: 9px;
+  }
+}
+
+@media only screen and (max-width: 767.98px) {
+  .seat {
+    margin: 12px;
+  }
+  .checkout-seat-list {
+    margin-bottom: 30px;
+  }
+  .checkout-infor {
+    margin-top: 20px;
+  }
   .total-price {
     margin-right: 3%;
     text-align: start;
@@ -159,6 +183,9 @@
   }
   .price-vnd {
     margin-right: 44%;
+  }
+  .seat-types {
+    display: flex;
   }
 }
 
@@ -176,55 +203,96 @@
   }
 }
 
+/* @media only screen and (max-width: 639.98px) {
+  .checkout-seat-list {
+    grid-column-start: span 12;
+    grid-column-end: span 12;
+    margin-left: 8px;
+  }
+  .seat {
+    margin: 10px;
+  }
+} */
+
+@media only screen and (max-width: 650px) {
+  .seat {
+    margin: 10px;
+  }
+}
+
+@media only screen and (max-width: 639.98px) {
+  .checkout-seat-list {
+    grid-column: span 12 / span 12;
+  }
+  .checkout-infor {
+    grid-column: span 12 / span 12;
+  }
+  .seat {
+    margin: 9px;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .button-back-home {
     top: 165px;
   }
 }
 
-@media only screen and (max-width: 576px) {
-  .total-price {
-    margin-right: 3%;
-    text-align: start;
-    margin-left: 36%;
+@media only screen and (max-width: 590px) {
+  .seat {
+    margin: 7px;
   }
-  .price-vnd {
-    margin-right: 41%;
-  }
-  .checkout-total-price {
-    width: 100% !important;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .total {
-    display: block !important;
-  }
-  .checkout-email,
-  .checkout-phone {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .infor-seat,
-  .infor-email,
-  .infor-phone {
-    width: 100%;
-    text-align: center;
-  }
-  .total-price-top {
-    margin-left: -71%;
-  }
-  .checkout-seat {
-    padding-bottom: 20%;
-  }
-  .display-cinema {
-    width: 60%;
-    height: 3%;
-    margin-right: 27%;
+}
+
+@media only screen and (max-width: 550px) {
+  .seat {
+    margin: 5px;
   }
 }
 
 @media only screen and (max-width: 530px) {
   .button-back-home {
     top: 190px;
+  }
+  .loading-checkout {
+    margin-top: 120px;
+  }
+}
+
+@media only screen and (max-width: 510px) {
+  .seat {
+    margin: 4px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .seat {
+    width: 30px;
+    height: 30px;
+    margin: 5px 5px;
+  }
+}
+
+@media only screen and (max-width: 445px) {
+  .seat {
+    width: 30px;
+    height: 30px;
+    margin: 5px 4px;
+  }
+}
+
+@media only screen and (max-width: 424px) {
+  .seat {
+    width: 30px;
+    height: 30px;
+    margin: 5px 3px;
+  }
+}
+
+@media only screen and (max-width: 404px) {
+  .seat {
+    width: 30px;
+    height: 30px;
+    margin: 5px 2px;
   }
 }
