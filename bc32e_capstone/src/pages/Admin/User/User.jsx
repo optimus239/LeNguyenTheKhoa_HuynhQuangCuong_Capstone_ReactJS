@@ -205,7 +205,7 @@ const User = () => {
         return (
           <div>
             <NavLink
-              to={`addedituser/${record.taiKhoan}`}
+              to={`/admin/user/addedituser/${record.taiKhoan}`}
               className="text-xl text-green-400 hover:text-red-400 mr-2"
             >
               <EditOutlined />
