@@ -38,20 +38,40 @@ const TicketInfor = () => {
                         {ticket.tenPhim}
                       </h2>
                       <div className="text-gray-500">
-                        <span>Ngày chiếu: </span>
-                        {moment(ticket.ngayDat).format("DD-MM-YYYY")}
-                        <br />
-                        <span>Giờ chiếu: </span>
-                        {moment(ticket.ngayDat).format("hh-mm A")}
-                        <br />
-                        <span>Rạp: </span>
-                        {seats.tenHeThongRap} <br />
-                        <span>Ghế: </span>
-                        {ticket.danhSachGhe.map((ghe, index) => (
-                          <span className="text-blue-400 mr-2" key={index}>
-                            {ghe.tenGhe}
+                        <div>
+                          <span>Ngày chiếu: </span>
+                          {moment(ticket.ngayDat).format("DD-MM-YYYY")}
+                        </div>
+
+                        <div>
+                          <span>Giờ chiếu: </span>
+                          {moment(ticket.ngayDat).format("hh-mm A")}
+                          <br />
+                        </div>
+                        <div>
+                          <span>Rạp: </span>
+                          {seats.tenHeThongRap} <br />
+                        </div>
+                        <div>
+                          <span>Ghế: </span> <br />
+                          <span className=" flex flex-wrap">
+                            {_.sortBy(ticket.danhSachGhe, ["tenGhe"]).map(
+                              (ghe, index) => (
+                                <span
+                                  className="mr-2 text-blue-400"
+                                  key={index}
+                                >
+                                  {ghe.tenGhe}
+                                </span>
+                              )
+                            )}
                           </span>
-                        ))}
+                        </div>
+                        {/* {_.sortBy(ticket.danhSachGhe, ["tenGhe"]).map((seat, i) => (
+                <button className="mr-2 seat availableSeatBy" key={i}>
+                  {seat.tenGhe}
+                </button>
+              ))} */}
                       </div>
                     </div>
                   </div>

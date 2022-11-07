@@ -27,7 +27,8 @@ const Header = () => {
       ),
       key: "0",
     },
-    userLogin?.maLoaiNguoiDung === "QuanTri"
+    userLogin?.maLoaiNguoiDung === "QuanTri" ||
+    userLogin?.maLoaiNguoiDung === "Quản trị"
       ? {
           label: (
             <Link rel="noopener noreferrer" to="/admin">
