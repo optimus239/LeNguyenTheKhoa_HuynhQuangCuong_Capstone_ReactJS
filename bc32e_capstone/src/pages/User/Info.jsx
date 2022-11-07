@@ -10,7 +10,6 @@ import {
 
 const Info = () => {
   const { userLogin } = useQuanLyNguoiDung();
-  console.log("userLogin: ", userLogin);
   const { userDetail } = useQuanLyNguoiDung();
   const dispatch = useDispatch();
 

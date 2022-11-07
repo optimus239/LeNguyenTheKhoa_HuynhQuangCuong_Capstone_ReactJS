@@ -67,11 +67,6 @@ const TicketInfor = () => {
                             )}
                           </span>
                         </div>
-                        {/* {_.sortBy(ticket.danhSachGhe, ["tenGhe"]).map((seat, i) => (
-                <button className="mr-2 seat availableSeatBy" key={i}>
-                  {seat.tenGhe}
-                </button>
-              ))} */}
                       </div>
                     </div>
                   </div>

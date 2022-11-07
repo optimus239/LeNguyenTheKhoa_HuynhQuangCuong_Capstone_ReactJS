@@ -198,7 +198,6 @@ export const {
       .addCase(inforCustomer.fulfilled, (state, action) => {
         state.isFetching = false;
         state.customer = action.payload;
-        console.log("actioncustomer ", action.payload);
       })
       .addCase(inforCustomer.rejected, (state, action) => {
         state.isFetching = false;
@@ -220,7 +219,7 @@ export const login = createAsyncThunk(
         },
         data,
       });
-      console.log("thành cong");
+
       return result.data.content;
     } catch (error) {
       console.log("error: ", error.response.data);
@@ -242,7 +241,7 @@ export const signUp = createAsyncThunk(
         },
         data,
       });
-      console.log("cong cong");
+
       return result.data.content;
     } catch (error) {
       console.log("error: ", error.response.data);
