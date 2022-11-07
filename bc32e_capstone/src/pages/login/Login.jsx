@@ -26,7 +26,6 @@ const Login = () => {
 
   useEffect(() => {
     if (userLogin) {
-      console.log("gì dọ");
       navigate(-1);
     }
   }, [userLogin]);

@@ -9,13 +9,13 @@ import {
 } from "../../store/quanLyNguoiDung";
 
 const Info = () => {
-  const userLogin = JSON.parse(localStorage.getItem("USER_LOGIN"));
+  const { userLogin } = useQuanLyNguoiDung();
   const { userDetail } = useQuanLyNguoiDung();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(layThongTinNguoiDung(userLogin.taiKhoan));
-  }, []);
+  }, [userLogin]);
   const {
     register,
     handleSubmit,
