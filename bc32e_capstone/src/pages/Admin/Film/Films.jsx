@@ -169,7 +169,7 @@ const Films = () => {
         return (
           <div>
             <NavLink
-              to={`edit/${record.maPhim}`}
+              to={`/admin/films/edit/${record.maPhim}`}
               className="text-xl text-green-400 hover:text-red-400 mr-2"
             >
               <EditOutlined />
@@ -196,7 +196,7 @@ const Films = () => {
               <DeleteOutlined />
             </span>
             <NavLink
-              to={`showtime/${record.maPhim}`}
+              to={`/admin/films/showtime/${record.maPhim}`}
               className="text-xl text-blue-400 hover:text-red-400"
               onClick={() => {
                 localStorage.setItem("filmparams", JSON.stringify(record));
