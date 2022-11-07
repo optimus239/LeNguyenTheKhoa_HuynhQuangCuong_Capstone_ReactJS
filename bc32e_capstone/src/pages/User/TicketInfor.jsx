@@ -49,8 +49,12 @@ const TicketInfor = () => {
                           <br />
                         </div>
                         <div>
-                          <span>Rạp: </span>
+                          <span>Địa điểm: </span>
                           {seats.tenHeThongRap} <br />
+                        </div>
+                        <div>
+                          <span>Rạp: </span>
+                          {seats.tenCumRap} <br />
                         </div>
                         <div>
                           <span>Ghế: </span> <br />
